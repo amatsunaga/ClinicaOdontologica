@@ -1,4 +1,4 @@
-package com.dh.clinicaodontologica.model;
+package com.dh.clinicaodontologica.service.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,10 +1,7 @@
 package com.dh.clinicaodontologica.dao;
 
-import com.dh.clinicaodontologica.model.Paciente;
-
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public interface IDao<T>  {
     public T salvar(T t) throws SQLException;

@@ -1,6 +1,6 @@
 package com.dh.clinicaodontologica.controller;
 
-import com.dh.clinicaodontologica.model.Paciente;
+import com.dh.clinicaodontologica.service.model.Paciente;
 import com.dh.clinicaodontologica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ public class PacienteController {
 
     @RequestMapping(value = "/findPaciente/{idPaciente}", method = RequestMethod.GET)
     public String getPacienteById(@PathVariable int idPaciente){
-        return "Você pediu o paciente: "+idPaciente ;
+        return "Você pediu o paciente: " +idPaciente;
     }
 
     @PostMapping
