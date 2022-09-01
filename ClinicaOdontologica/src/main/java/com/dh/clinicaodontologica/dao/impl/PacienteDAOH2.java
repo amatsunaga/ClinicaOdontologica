@@ -81,6 +81,37 @@ public class PacienteDAOH2 implements IDao<Paciente> {
         return pacientes;
     }
 
+
+    public Paciente buscarPorId(int id) throws SQLException {
+        logger.debug("Abrindo uma conexão no banco");
+        Connection connection = null;
+        Statement stmt = null;
+        String query = String.format("SELECT * FROM paciente WHERE ID='%s'",  id);
+        Paciente paciente = null;
+        try {
+
+            configuracaoJDBC = new ConfiguracaoJDBC("org.h2.Driver","jdbc:h2:~/paciente;INIT=RUNSCRIPT FROM 'create.sql'","sa","");
+            connection = configuracaoJDBC.getConnection();
+            stmt = connection.createStatement();
+            ResultSet resultado = stmt.executeQuery(query);
+
+            logger.debug("Buscando um paciente");
+            while (resultado.next()) {
+                paciente = criarObjetoPaciente(resultado);
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+
+            logger.debug("Fechando a conexão no banco");
+            connection.close();
+        }
+
+        return paciente;
+    }
+
     @Override
     public void excluir(int id) throws SQLException {
         logger.info("Abrindo conexão");

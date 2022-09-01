@@ -16,9 +16,9 @@ public class PacienteController {
     private PacienteService service;
 
     @RequestMapping(value = "/findPaciente/{idPaciente}", method = RequestMethod.GET)
-    public String getPacienteById(@PathVariable int idPaciente){
-        return "Você pediu o paciente: "+idPaciente ;
-    }
+        public Paciente getPacienteById(@PathVariable int idPaciente) throws SQLException {
+            return service.BuscarPorId(idPaciente);
+        }
 
     @PostMapping
     public Paciente salvarPaciente(@RequestBody Paciente paciente) throws SQLException {

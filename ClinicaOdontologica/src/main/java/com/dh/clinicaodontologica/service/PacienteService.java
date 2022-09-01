@@ -22,6 +22,10 @@ public class PacienteService {
         return pacienteDao.salvar(paciente);
     }
 
+    public Paciente BuscarPorId(int id) throws SQLException {
+        return pacienteDao.buscarPorId(id);
+    }
+
     public void alterar(Paciente paciente) throws SQLException {
         pacienteDao.alterar(paciente);
     }
