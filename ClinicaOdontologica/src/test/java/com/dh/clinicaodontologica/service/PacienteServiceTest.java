@@ -1,7 +1,7 @@
 package com.dh.clinicaodontologica.service;
 
 import com.dh.clinicaodontologica.dao.impl.PacienteDAOH2;
-import com.dh.clinicaodontologica.service.model.Paciente;
+import com.dh.clinicaodontologica.model.Paciente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

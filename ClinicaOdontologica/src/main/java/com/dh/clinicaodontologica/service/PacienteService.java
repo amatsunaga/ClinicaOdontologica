@@ -1,7 +1,7 @@
 package com.dh.clinicaodontologica.service;
 
 import com.dh.clinicaodontologica.dao.impl.PacienteDAOH2;
-import com.dh.clinicaodontologica.service.model.Paciente;
+import com.dh.clinicaodontologica.model.Paciente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class PacienteService {
         return pacienteDao.salvar(paciente);
     }
 
-    public Paciente BuscarPorId(int id) throws SQLException {
+    public Paciente buscarPorId(int id) throws SQLException {
         return pacienteDao.buscarPorId(id);
     }
 

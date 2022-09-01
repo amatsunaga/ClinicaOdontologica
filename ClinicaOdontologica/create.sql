@@ -12,6 +12,6 @@ nome varchar(255),
 sobrenome varchar(255),
 enderecoId int not null,
 rg varchar(20),
-dataCadastro date,
-FOREIGN KEY (enderecoId) REFERENCES Endereco(enderecoId)
+dataCadastro date
+--FOREIGN KEY (enderecoId) REFERENCES Endereco(enderecoId)
 );

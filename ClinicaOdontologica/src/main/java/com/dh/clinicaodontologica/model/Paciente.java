@@ -1,4 +1,4 @@
-package com.dh.clinicaodontologica.service.model;
+package com.dh.clinicaodontologica.model;
 import lombok.*;
 
 import java.time.LocalDate;

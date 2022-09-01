@@ -17,7 +17,7 @@ public class PacienteController {
 
     @RequestMapping(value = "/findPaciente/{idPaciente}", method = RequestMethod.GET)
         public Paciente getPacienteById(@PathVariable int idPaciente) throws SQLException {
-            return service.BuscarPorId(idPaciente);
+            return service.buscarPorId(idPaciente);
         }
 
     @PostMapping

@@ -1,7 +1,7 @@
 package com.dh.clinicaodontologica.dao.impl;
 
 import com.dh.clinicaodontologica.dao.IDao;
-import com.dh.clinicaodontologica.service.model.Dentista;
+import com.dh.clinicaodontologica.model.Dentista;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.SQLException;
