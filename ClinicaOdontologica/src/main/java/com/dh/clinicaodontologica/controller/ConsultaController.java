@@ -1,10 +1,9 @@
 package com.dh.clinicaodontologica.controller;
 
 
-import com.dh.clinicaodontologica.model.Consulta;
+import com.dh.clinicaodontologica.service.model.Consulta;
 import com.dh.clinicaodontologica.service.ConsultaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;

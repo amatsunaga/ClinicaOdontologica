@@ -2,7 +2,7 @@ package com.dh.clinicaodontologica.dao.impl;
 
 import com.dh.clinicaodontologica.dao.ConfiguracaoJDBC;
 import com.dh.clinicaodontologica.dao.IDao;
-import com.dh.clinicaodontologica.model.Paciente;
+import com.dh.clinicaodontologica.service.model.Paciente;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,7 +29,7 @@ public class PacienteDAOH2 implements IDao<Paciente> {
 
         String query = String.format("INSERT INTO Paciente (nome, sobrenome, enderecoId, rg, dataCadastro)" +
                         " values('%s','%s','%s','%s','%s')",
-                paciente.getNome(), paciente.getSobrenome(), paciente.getEnderecoId(), paciente.getRg(), paciente.getDataDeCadastro());
+                paciente.getNome(), paciente.getSobrenome(), paciente.getEnderecoId(), paciente.getRg(), paciente.getDataCadastro());
 
         try {
             Statement statement = connection.createStatement();

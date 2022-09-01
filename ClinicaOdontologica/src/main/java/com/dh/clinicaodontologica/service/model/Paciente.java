@@ -1,4 +1,4 @@
-package com.dh.clinicaodontologica.model;
+package com.dh.clinicaodontologica.service.model;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ public class Paciente {
     private String sobrenome;
     private int enderecoId;
     private String rg;
-    private LocalDate dataDeCadastro;
+    private LocalDate dataCadastro;
 
 
 }
