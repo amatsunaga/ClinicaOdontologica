@@ -4,7 +4,7 @@ Back End I
 
 Trabalho integrador:
 
-#Sistema de reserva de consultas
+# Sistema de reserva de consultas
 
 Desejamos implementar um sistema que permita administrar a reserva/marcação
 de consultas para uma clínica odontológica. Os requisitos que devem ser
@@ -23,7 +23,7 @@ hora.
 
 
 
-##Requerimentos técnicos
+## Requerimentos técnicos
 
 A aplicação deve ser desenvolvida em camadas:
 - Camada de entidade de negócios: são as classes Java do nosso negócio
@@ -42,7 +42,8 @@ uma dessas duas opções: HTML+JavaScript ou React para a visualização.
 gerada e realizando testes unitários para garantir a qualidade dos
 desenvolvimentos.
 
-###Avanços
+### Avanços
+
 O trabalho terá uma única entrega final, mas para que você possa se organizar,
 sugerimos que progrida da seguinte forma:
 
