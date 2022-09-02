@@ -15,3 +15,10 @@ rg varchar(20),
 dataCadastro date
 --FOREIGN KEY (enderecoId) REFERENCES Endereco(enderecoId)
 );
+
+CREATE TABLE IF NOT EXISTS Consulta (
+consultaId INT AUTO_INCREMENT PRIMARY KEY,
+dentistaId INT,
+pacienteId INT,
+dataConsulta DATE
+);

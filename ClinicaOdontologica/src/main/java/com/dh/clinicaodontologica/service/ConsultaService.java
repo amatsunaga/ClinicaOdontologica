@@ -13,9 +13,9 @@ public class ConsultaService {
     @Autowired
     private ConsultaDAOH2 consultaDAOH2;
 
-    public ConsultaService(ConsultaDAOH2 consultaDAOH2) {
-        this.consultaDAOH2 = consultaDAOH2;
-    }
+//    public ConsultaService(ConsultaDAOH2 consultaDAOH2) {
+//        this.consultaDAOH2 = consultaDAOH2;
+//    }
 
     public Consulta salvar(Consulta consulta) throws SQLException {
         return consultaDAOH2.salvar(consulta);
@@ -23,6 +23,13 @@ public class ConsultaService {
 
     public List<Consulta> buscarTodos() throws SQLException {
         return consultaDAOH2.buscarTodos();
+    }
+
+    public List<Consulta> buscarPorPaciente(int id) throws SQLException {
+        return consultaDAOH2.buscarPorPaciente(id);
+    }
+    public List<Consulta> buscarPorDentista(int id) throws SQLException {
+        return consultaDAOH2.buscarPorDentista(id);
     }
 
     public void excluir(int id) throws SQLException {

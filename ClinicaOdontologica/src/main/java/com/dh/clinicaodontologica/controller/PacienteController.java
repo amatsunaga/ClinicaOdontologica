@@ -27,7 +27,6 @@ public class PacienteController {
 
     @PatchMapping
     public void alterar(@RequestBody Paciente paciente) throws SQLException {
-        System.out.println();
         service.alterar(paciente);
     }
 

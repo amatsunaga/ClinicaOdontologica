@@ -12,8 +12,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Consulta {
 
-    private int id;
-    private Dentista dentista;
-    private Paciente paciente;
-    private LocalDate data;
+    private int consultaId;
+    private int dentistaId;
+    private int pacienteId;
+    private LocalDate dataConsulta;
+
+    public Consulta(int dentistaId, int pacienteId, LocalDate dataConsulta) {
+        this.dentistaId = dentistaId;
+        this.pacienteId = pacienteId;
+        this.dataConsulta = dataConsulta;
+    }
 }
