@@ -16,22 +16,21 @@ public class DentistaController {
     private DentistaService service;
 
     @RequestMapping(value = "/findDentista/{idDentista}", method = RequestMethod.GET)
-    public String getDentistaById(@PathVariable int idDentista){
+    public String getDentistaById(@PathVariable Long idDentista){
         return "Você pediu o dentista: "+idDentista ;
     }
     @PostMapping
-    public Dentista salvarDentista(@RequestBody Dentista dentista) throws SQLException {
+    public Dentista salvarDentista(@RequestBody Dentista dentista) {
         return service.salvar(dentista);
     }
 
     @PatchMapping
-    public void alterar(@RequestBody Dentista dentista) throws SQLException {
-        System.out.println();
+    public void alterar(@RequestBody Dentista dentista) {
         service.alterar(dentista);
     }
 
     @GetMapping
-    public List<Dentista> buscarTodos() throws SQLException {
+    public List<Dentista> buscarTodos(){
         return service.buscarTodos();
     }
 }

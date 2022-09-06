@@ -16,32 +16,32 @@ public class ConsultaController {
     private ConsultaService service;
 
     @PostMapping
-    public Consulta salvarConsulta(@RequestBody Consulta consulta) throws SQLException {
+    public Consulta salvarConsulta(@RequestBody Consulta consulta){
         return service.salvar(consulta);
     }
 
     @GetMapping
-    public List<Consulta> buscarTodos() throws SQLException {
+    public List<Consulta> buscarTodos(){
         return service.buscarTodos();
     }
 
-    @RequestMapping(value = "/findConsulta/paciente/{pacienteId}")
-    public List<Consulta> buscarPorPaciente(@PathVariable int pacienteId) throws SQLException {
-        return service.buscarPorPaciente(pacienteId);
-    }
-
-    @RequestMapping(value = "/findConsulta/dentista/{dentistaId}")
-    public List<Consulta> buscarPorDentista(@PathVariable int dentistaId) throws SQLException {
-        return service.buscarPorDentista(dentistaId);
-    }
+//    @RequestMapping(value = "/findConsulta/paciente/{pacienteId}")
+//    public List<Consulta> buscarPorPaciente(@PathVariable Long pacienteId) throws SQLException {
+//        return service.buscarPorPaciente(pacienteId);
+//    }
+//
+//    @RequestMapping(value = "/findConsulta/dentista/{dentistaId}")
+//    public List<Consulta> buscarPorDentista(@PathVariable Long dentistaId) throws SQLException {
+//        return service.buscarPorDentista(dentistaId);
+//    }
 
     @DeleteMapping
-    public void excluir(@RequestParam("id") int id) throws SQLException {
+    public void excluir(@RequestParam("id") Long id) {
         service.excluir(id);
     }
 
     @PatchMapping
-    public void alterar(@RequestBody Consulta consulta) throws SQLException {
+    public void alterar(@RequestBody Consulta consulta) {
         service.alterar(consulta);
     }
 }
