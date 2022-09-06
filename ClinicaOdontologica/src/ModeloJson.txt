@@ -1,0 +1,7 @@
+{
+    "nome": "TesteFinal2",
+    "sobrenome": "Campos",
+    "enderecoId": 4,
+    "rg": "123456",
+    "dataDeCadastro": "2022-02-02"
+}
