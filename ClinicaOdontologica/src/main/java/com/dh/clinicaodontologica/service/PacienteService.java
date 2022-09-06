@@ -1,40 +1,39 @@
 package com.dh.clinicaodontologica.service;
 
-import com.dh.clinicaodontologica.dao.impl.PacienteDAOH2;
 import com.dh.clinicaodontologica.model.Paciente;
+import com.dh.clinicaodontologica.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PacienteService {
 
     @Autowired
-    private PacienteDAOH2 pacienteDao;
+    private PacienteRepository repository;
 
-    public PacienteService(PacienteDAOH2 pacienteDao) {
-        this.pacienteDao = pacienteDao;
+    public Paciente salvar(Paciente paciente)  {
+        return repository.save(paciente);
     }
 
-    public Paciente salvar(Paciente paciente) throws SQLException {
-        return pacienteDao.salvar(paciente);
+    public List<Paciente> buscarTodos() {
+        return repository.findAll();
     }
 
-    public Paciente buscarPorId(int id) throws SQLException {
-        return pacienteDao.buscarPorId(id);
+    public Optional<Paciente> buscarPorId(Long id) {
+        return repository.findById(id);
     }
 
-    public void alterar(Paciente paciente) throws SQLException {
-        pacienteDao.alterar(paciente);
+
+    public void excluir(Long id) {
+        repository.deleteById(id);
     }
 
-    public void excluir(int id) throws SQLException {
-        pacienteDao.excluir(id);
-    }
-
-    public List<Paciente> buscarTodos() throws SQLException {
-        return pacienteDao.buscarTodos();
+    public void alterar(Paciente paciente) {
+        repository.save(paciente);
     }
 }

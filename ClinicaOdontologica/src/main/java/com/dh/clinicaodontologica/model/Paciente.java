@@ -1,4 +1,6 @@
 package com.dh.clinicaodontologica.model;
+
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -7,10 +9,13 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 
 public class Paciente {
 
-    private int id;
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String sobrenome;
     private int enderecoId;

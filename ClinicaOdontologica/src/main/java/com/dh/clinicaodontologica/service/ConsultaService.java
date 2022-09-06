@@ -1,7 +1,8 @@
 package com.dh.clinicaodontologica.service;
 
-import com.dh.clinicaodontologica.dao.impl.ConsultaDAOH2;
+
 import com.dh.clinicaodontologica.model.Consulta;
+import com.dh.clinicaodontologica.repository.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,33 +12,33 @@ import java.util.List;
 @Service
 public class ConsultaService {
     @Autowired
-    private ConsultaDAOH2 consultaDAOH2;
+    private ConsultaRepository repository;
 
 //    public ConsultaService(ConsultaDAOH2 consultaDAOH2) {
 //        this.consultaDAOH2 = consultaDAOH2;
 //    }
 
-    public Consulta salvar(Consulta consulta) throws SQLException {
-        return consultaDAOH2.salvar(consulta);
+    public Consulta salvar(Consulta consulta)  {
+        return repository.save(consulta);
     }
 
-    public List<Consulta> buscarTodos() throws SQLException {
-        return consultaDAOH2.buscarTodos();
+    public List<Consulta> buscarTodos() {
+        return repository.findAll();
     }
 
-    public List<Consulta> buscarPorPaciente(int id) throws SQLException {
-        return consultaDAOH2.buscarPorPaciente(id);
-    }
-    public List<Consulta> buscarPorDentista(int id) throws SQLException {
-        return consultaDAOH2.buscarPorDentista(id);
+//    public List<Consulta> buscarPorPaciente(int id) throws SQLException {
+//        return consultaDAOH2.buscarPorPaciente(id);
+//    }
+//    public List<Consulta> buscarPorDentista(int id) throws SQLException {
+//        return consultaDAOH2.buscarPorDentista(id);
+//    }
+
+    public void excluir(Long id) {
+        repository.deleteById(id);
     }
 
-    public void excluir(int id) throws SQLException {
-        consultaDAOH2.excluir(id);
-    }
-
-    public void alterar(Consulta consulta) throws SQLException {
-        consultaDAOH2.alterar(consulta);
+    public void alterar(Consulta consulta) {
+        repository.save(consulta);
     }
 
 
