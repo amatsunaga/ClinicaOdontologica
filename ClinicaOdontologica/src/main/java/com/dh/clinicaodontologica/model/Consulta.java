@@ -20,15 +20,12 @@ public class Consulta {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "consulta_id")
-    @JoinColumn(name = "consulta_id")
     private Long consultaId;
 
     @Column(name = "dentista_id")
-    @JoinColumn(name = "dentista_id")
     private Long dentistaId;
 
     @Column(name = "paciente_id")
-    @JoinColumn(name = "paciente_id")
     private Long pacienteId;
 
     private LocalDate dataConsulta;
