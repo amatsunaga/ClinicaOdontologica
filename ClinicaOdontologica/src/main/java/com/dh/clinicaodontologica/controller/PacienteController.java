@@ -3,6 +3,8 @@ package com.dh.clinicaodontologica.controller;
 import com.dh.clinicaodontologica.model.Paciente;
 import com.dh.clinicaodontologica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +38,8 @@ public class PacienteController {
     }
 
     @GetMapping
-    public List<Paciente> buscarTodos() {
-        return service.buscarTodos();
+    public ResponseEntity<List<Paciente>> buscarTodos() {
+        List<Paciente> pacientes = service.buscarTodos();
+        return new ResponseEntity<List<Paciente>>(pacientes, HttpStatus.OK);
     }
 }

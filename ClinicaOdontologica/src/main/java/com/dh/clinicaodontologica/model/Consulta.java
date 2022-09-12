@@ -20,22 +20,16 @@ public class Consulta {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "consulta_id")
-    @JoinColumn(name = "consulta_id")
     private Long consultaId;
 
-    @Column(name = "dentista_id")
+    @ManyToOne
     @JoinColumn(name = "dentista_id")
-    private Long dentistaId;
+    private Dentista dentista;
 
-    @Column(name = "paciente_id")
+    @ManyToOne
     @JoinColumn(name = "paciente_id")
-    private Long pacienteId;
+    private Paciente paciente;
 
     private LocalDate dataConsulta;
 
-    public Consulta(Long dentistaId, Long pacienteId, LocalDate dataConsulta) {
-        this.dentistaId = dentistaId;
-        this.pacienteId = pacienteId;
-        this.dataConsulta = dataConsulta;
-    }
 }

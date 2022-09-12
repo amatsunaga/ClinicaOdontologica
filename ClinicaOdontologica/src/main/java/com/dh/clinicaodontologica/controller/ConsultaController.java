@@ -25,15 +25,6 @@ public class ConsultaController {
         return service.buscarTodos();
     }
 
-//    @RequestMapping(value = "/findConsulta/paciente/{pacienteId}")
-//    public List<Consulta> buscarPorPaciente(@PathVariable Long pacienteId) throws SQLException {
-//        return service.buscarPorPaciente(pacienteId);
-//    }
-//
-//    @RequestMapping(value = "/findConsulta/dentista/{dentistaId}")
-//    public List<Consulta> buscarPorDentista(@PathVariable Long dentistaId) throws SQLException {
-//        return service.buscarPorDentista(dentistaId);
-//    }
 
     @DeleteMapping
     public void excluir(@RequestParam("id") Long id) {

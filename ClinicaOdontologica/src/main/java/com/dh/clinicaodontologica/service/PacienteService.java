@@ -1,6 +1,7 @@
 package com.dh.clinicaodontologica.service;
 
 import com.dh.clinicaodontologica.model.Paciente;
+import com.dh.clinicaodontologica.repository.EnderecoRepository;
 import com.dh.clinicaodontologica.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class PacienteService {
 
     @Autowired
     private PacienteRepository repository;
+
 
     public Paciente salvar(Paciente paciente)  {
         return repository.save(paciente);
