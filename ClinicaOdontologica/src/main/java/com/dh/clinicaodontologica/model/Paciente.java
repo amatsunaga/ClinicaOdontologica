@@ -18,7 +18,11 @@ public class Paciente {
     private Long id;
     private String nome;
     private String sobrenome;
-    private int enderecoId;
+
+    @OneToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
+
     private String rg;
     private LocalDate dataCadastro;
 

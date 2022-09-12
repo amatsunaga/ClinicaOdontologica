@@ -1,0 +1,32 @@
+Paciente ->
+{
+    "nome": "TesteFinal2",
+    "sobrenome": "Campos",
+    "enderecoId": 4,
+    "rg": "123456",
+    "dataDeCadastro": "2022-02-02"
+}
+Dentista ->
+{
+    "nome": "Zezinho",
+    "sobrenome": "Dentinho",
+    "matricula": "1234"
+}
+Consulta ->
+{
+    "dentista":{
+        "id": 1
+    },
+    "paciente":{
+        "id": 10
+    },
+    "dataConsulta": "2022-09-30"
+}
+Endereço ->
+ {
+        "rua": "Bonita",
+        "numero": 123,
+        "cidade": "Teste",
+        "bairro": "Legal",
+        "cep": "10000210"
+}

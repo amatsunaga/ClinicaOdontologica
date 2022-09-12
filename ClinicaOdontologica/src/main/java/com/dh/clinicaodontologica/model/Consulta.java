@@ -22,17 +22,14 @@ public class Consulta {
     @Column(name = "consulta_id")
     private Long consultaId;
 
-    @Column(name = "dentista_id")
-    private Long dentistaId;
+    @ManyToOne
+    @JoinColumn(name = "dentista_id")
+    private Dentista dentista;
 
-    @Column(name = "paciente_id")
-    private Long pacienteId;
+    @ManyToOne
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
 
     private LocalDate dataConsulta;
 
-    public Consulta(Long dentistaId, Long pacienteId, LocalDate dataConsulta) {
-        this.dentistaId = dentistaId;
-        this.pacienteId = pacienteId;
-        this.dataConsulta = dataConsulta;
-    }
 }
