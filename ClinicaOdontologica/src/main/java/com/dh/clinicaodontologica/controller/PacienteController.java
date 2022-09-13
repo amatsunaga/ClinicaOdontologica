@@ -1,6 +1,7 @@
 package com.dh.clinicaodontologica.controller;
 
 import com.dh.clinicaodontologica.model.Paciente;
+import com.dh.clinicaodontologica.model.dto.PacienteDto;
 import com.dh.clinicaodontologica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,12 @@ public class PacienteController {
     private PacienteService service;
 
     @RequestMapping(value = "/findPaciente/{idPaciente}", method = RequestMethod.GET)
-        public Optional<Paciente> getPacienteById(@PathVariable Long idPaciente){
-            return service.buscarPorId(idPaciente);
+        public ResponseEntity getPacienteById(@PathVariable Long idPaciente){
+            Optional<Paciente> pacienteOptional = service.buscarPorId(idPaciente);
+            if(pacienteOptional.isEmpty()) {
+                return new ResponseEntity("Paciente não encontrado", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity(pacienteOptional, HttpStatus.OK);
         }
 
     @PostMapping
@@ -39,7 +44,10 @@ public class PacienteController {
 
     @GetMapping
     public ResponseEntity<List<Paciente>> buscarTodos() {
-        List<Paciente> pacientes = service.buscarTodos();
-        return new ResponseEntity<List<Paciente>>(pacientes, HttpStatus.OK);
+        List<PacienteDto> pacientes = service.buscarTodos();
+        if(pacientes.isEmpty()){
+            return new ResponseEntity("Nenhum Paciente Encontrado", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(pacientes, HttpStatus.OK);
     }
 }
