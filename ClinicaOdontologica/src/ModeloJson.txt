@@ -1,6 +1,6 @@
 Paciente ->
 {
-    "nome": "TesteFinal2",
+    "nome": "TesteComEndereco",
     "sobrenome": "Campos",
     "endereco": {
         "id": 1
