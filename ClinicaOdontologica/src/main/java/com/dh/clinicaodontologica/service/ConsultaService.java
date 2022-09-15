@@ -29,9 +29,9 @@ public class ConsultaService {
 //    public List<Consulta> buscarPorPaciente(int id) throws SQLException {
 //        return consultaDAOH2.buscarPorPaciente(id);
 //    }
-//    public List<Consulta> buscarPorDentista(int id) throws SQLException {
-//        return consultaDAOH2.buscarPorDentista(id);
-//    }
+    public List<Consulta> buscarPorDentista(String nome) {
+        return repository.findByDentistaNome(nome);
+    }
 
     public void excluir(Long id) {
         repository.deleteById(id);

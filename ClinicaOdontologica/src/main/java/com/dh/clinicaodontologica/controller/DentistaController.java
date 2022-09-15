@@ -4,6 +4,8 @@ import com.dh.clinicaodontologica.model.Dentista;
 import com.dh.clinicaodontologica.model.Paciente;
 import com.dh.clinicaodontologica.service.DentistaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -17,13 +19,30 @@ public class DentistaController {
     @Autowired
     private DentistaService service;
 
-    @RequestMapping(value = "/findDentista/{idDentista}", method = RequestMethod.GET)
-    public Optional<Dentista> getDentistaById(@PathVariable Long idDentista){
-        return service.buscarPorId(idDentista);
-    }
     @PostMapping
-    public Dentista salvarDentista(@RequestBody Dentista dentista) {
-        return service.salvar(dentista);
+    public ResponseEntity salvarDentista(@RequestBody Dentista dentista) {
+        Dentista dentistaSalvo = service.salvar(dentista);
+        if(dentistaSalvo == null) {
+            return new ResponseEntity("Erro ao salvar dentista", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(dentistaSalvo, HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity buscarTodos(){
+        List<Dentista> dentistas = service.buscarTodos();
+        if(dentistas.isEmpty()) {
+            return new ResponseEntity("Nenhum dentista encontrado", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(dentistas, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/findDentista/{idDentista}", method = RequestMethod.GET)
+    public ResponseEntity getDentistaById(@PathVariable Long idDentista){
+        Optional<Dentista> dentistaOptional = service.buscarPorId(idDentista);
+        if(dentistaOptional.isEmpty()) {
+            return new ResponseEntity("Dentista não encontrado", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(dentistaOptional, HttpStatus.OK);
     }
 
     @PatchMapping
@@ -31,8 +50,9 @@ public class DentistaController {
         service.alterar(dentista);
     }
 
-    @GetMapping
-    public List<Dentista> buscarTodos(){
-        return service.buscarTodos();
+    @DeleteMapping
+    public void excluir(@RequestParam("idDentista") Long idDentista)  {
+        service.excluir(idDentista);
     }
+
 }
