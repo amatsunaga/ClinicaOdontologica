@@ -20,5 +20,5 @@ CREATE TABLE IF NOT EXISTS Consulta (
 consultaId INT AUTO_INCREMENT PRIMARY KEY,
 dentistaId INT,
 pacienteId INT,
-dataConsulta DATE
+dataHoraCadastro TIMESTAMP
 );

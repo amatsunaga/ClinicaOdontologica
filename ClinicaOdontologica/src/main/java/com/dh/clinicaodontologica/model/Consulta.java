@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,6 +24,7 @@ public class Consulta {
     @Column(name = "consulta_id")
     private Long consultaId;
 
+
     @ManyToOne
     @JoinColumn(name = "dentista_id")
     private Dentista dentista;
@@ -30,6 +33,6 @@ public class Consulta {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    private LocalDate dataConsulta;
+    private LocalDateTime dataHoraConsulta;
 
 }
