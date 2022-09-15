@@ -1,0 +1,35 @@
+package com.dh.clinicaodontologica.model.dto;
+
+import com.dh.clinicaodontologica.model.Endereco;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ConsultaDto {
+
+    private String nome;
+    private String sobrenome;
+    private Endereco endereco;
+    private String rg;
+    private LocalDate dataCadastro;
+    private LocalTime horaCadastro;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-mm-ddT00:00:000")
+    private LocalDateTime dataHoraConsulta;
+
+
+//    public void setdataHoraCadastro (LocalDateTime dataHoraCadastro){
+//        this.dataHoraCadastro = Instant.ofEpochMilli(dataHoraCadastro.getTime()).atZone(ZoneId.of("UTC")).toLocalDateTime();
+//        this.dataCadastro = this.dataHoraCadastro.toLocalDate();
+//        this.horaCadastro = this.dataHoraCadastro.toLocalTime();
+//    }
+}
