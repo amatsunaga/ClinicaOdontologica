@@ -1,6 +1,7 @@
 package com.dh.clinicaodontologica.controller;
 
 import com.dh.clinicaodontologica.model.Paciente;
+import com.dh.clinicaodontologica.model.dto.PacienteDto;
 import com.dh.clinicaodontologica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,14 +18,31 @@ public class PacienteController {
     @Autowired
     private PacienteService service;
 
-    @RequestMapping(value = "/findPaciente/{idPaciente}", method = RequestMethod.GET)
-        public Optional<Paciente> getPacienteById(@PathVariable Long idPaciente){
-            return service.buscarPorId(idPaciente);
-        }
-
     @PostMapping
-    public Paciente salvarPaciente(@RequestBody Paciente paciente){
-        return service.salvar(paciente);
+    public ResponseEntity salvarPaciente(@RequestBody Paciente paciente){
+        Paciente pacienteSalvo = service.salvar(paciente);
+        if(pacienteSalvo == null) {
+            return new ResponseEntity("Erro ao salvar paciente", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity(pacienteSalvo, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Paciente>> buscarTodos() {
+        List<PacienteDto> pacientes = service.buscarTodos();
+        if(pacientes.isEmpty()){
+            return new ResponseEntity("Nenhum Paciente Encontrado", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(pacientes, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/findPaciente/{idPaciente}", method = RequestMethod.GET)
+    public ResponseEntity getPacienteById(@PathVariable Long idPaciente){
+        Optional<Paciente> pacienteOptional = service.buscarPorId(idPaciente);
+        if(pacienteOptional.isEmpty()) {
+            return new ResponseEntity("Paciente não encontrado", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(pacienteOptional, HttpStatus.OK);
     }
 
     @PatchMapping
@@ -35,11 +53,5 @@ public class PacienteController {
     @DeleteMapping
     public void excluir(@RequestParam("idPaciente") Long idPaciente)  {
         service.excluir(idPaciente);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Paciente>> buscarTodos() {
-        List<Paciente> pacientes = service.buscarTodos();
-        return new ResponseEntity<List<Paciente>>(pacientes, HttpStatus.OK);
     }
 }

@@ -1,10 +1,12 @@
 Paciente ->
 {
-    "nome": "TesteFinal2",
+    "nome": "TesteComEndereco",
     "sobrenome": "Campos",
-    "enderecoId": 4,
+    "endereco": {
+        "id": 1
+    },
     "rg": "123456",
-    "dataDeCadastro": "2022-02-02"
+    "dataCadastro": "2022-02-02"
 }
 Dentista ->
 {
