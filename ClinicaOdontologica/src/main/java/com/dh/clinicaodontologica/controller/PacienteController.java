@@ -1,7 +1,7 @@
 package com.dh.clinicaodontologica.controller;
 
-import com.dh.clinicaodontologica.model.Paciente;
-import com.dh.clinicaodontologica.model.dto.PacienteDto;
+import com.dh.clinicaodontologica.entity.Paciente;
+import com.dh.clinicaodontologica.entity.dto.PacienteDto;
 import com.dh.clinicaodontologica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

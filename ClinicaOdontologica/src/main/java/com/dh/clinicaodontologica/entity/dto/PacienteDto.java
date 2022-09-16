@@ -1,16 +1,13 @@
-package com.dh.clinicaodontologica.model.dto;
+package com.dh.clinicaodontologica.entity.dto;
 
-import com.dh.clinicaodontologica.model.Paciente;
-import com.dh.clinicaodontologica.model.Endereco;
+import com.dh.clinicaodontologica.entity.Endereco;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.time.*;
-import java.util.List;
 
 @Getter
 @Setter

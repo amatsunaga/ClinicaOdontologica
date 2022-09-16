@@ -1,6 +1,6 @@
-package com.dh.clinicaodontologica.model.dto;
+package com.dh.clinicaodontologica.entity.dto;
 
-import com.dh.clinicaodontologica.model.Endereco;
+import com.dh.clinicaodontologica.entity.Endereco;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

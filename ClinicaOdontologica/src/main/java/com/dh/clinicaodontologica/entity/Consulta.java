@@ -1,4 +1,4 @@
-package com.dh.clinicaodontologica.model;
+package com.dh.clinicaodontologica.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
