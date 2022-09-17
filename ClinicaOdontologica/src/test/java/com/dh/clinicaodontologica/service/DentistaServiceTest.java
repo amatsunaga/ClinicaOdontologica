@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +36,7 @@ class DentistaServiceTest {
 
     @Test
     void concluindoSalvamento() {
-        // Aparentemente ok
+        // Funcionando
         Dentista dentistaSalvo = new Dentista();
         dentistaSalvo = service.salvar(dentista);
 
@@ -44,7 +45,7 @@ class DentistaServiceTest {
 
     @Test
     void buscarTodos() {
-        // Não está funcionando
+        // Funcionando
         Dentista dentista1 = new Dentista();
         Dentista dentista2 = new Dentista();
         dentistaList = new ArrayList<>();
@@ -62,11 +63,17 @@ class DentistaServiceTest {
         dentistaBuscado = service.salvar(dentista);
         Optional<Dentista> dentistaOptional = service.buscarPorId(1L);
 
-        Assertions.assertEquals(6L, dentistaBuscado.getId());
+        Assertions.assertEquals(3L, dentistaBuscado.getId());
     }
 
     @Test
     void excluir() {
+        //Deu certo, porém continua substituindo a id a cada teste
+        Dentista dentista3 = new Dentista();
+        dentista3 = service.salvar(dentista);
+        Assertions.assertEquals(11L, dentista.getId());
+
+
     }
 
     @Test
