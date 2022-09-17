@@ -1,6 +1,6 @@
 package com.dh.clinicaodontologica.service;
 
-import com.dh.clinicaodontologica.model.Dentista;
+import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.repository.DentistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,8 +40,8 @@ public class DentistaService {
         repository.deleteById(id);
     }
 
-    public void alterar(Dentista dentista) {
-        repository.save(dentista);
+    public Dentista alterar(Dentista dentista) {
+        return repository.save(dentista);
     }
 
 }

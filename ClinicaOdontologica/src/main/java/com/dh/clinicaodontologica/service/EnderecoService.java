@@ -1,7 +1,6 @@
 package com.dh.clinicaodontologica.service;
 
-import com.dh.clinicaodontologica.model.Endereco;
-import com.dh.clinicaodontologica.model.Paciente;
+import com.dh.clinicaodontologica.entity.Endereco;
 import com.dh.clinicaodontologica.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
