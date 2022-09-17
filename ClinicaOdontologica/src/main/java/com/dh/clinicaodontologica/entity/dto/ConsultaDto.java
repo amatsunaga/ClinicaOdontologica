@@ -25,11 +25,11 @@ public class ConsultaDto {
     private LocalDate dataCadastro;
     private LocalTime horaCadastro;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-mm-ddT00:00:000")
-    private LocalDateTime dataHoraConsulta;
+    private LocalDateTime dataHoraCadastro;
 
 
     public void setdataHoraCadastro (LocalDateTime dataHoraCadastro){
-        this.dataHoraCadastro = Instant.ofEpochMilli(dataHoraCadastro.getTime()).atZone(ZoneId.of("UTC")).toLocalDateTime();
+        this.dataHoraCadastro = Instant.ofEpochMilli(dataHoraCadastro.getHour()).atZone(ZoneId.of("UTC")).toLocalDateTime();
         this.dataCadastro = this.dataHoraCadastro.toLocalDate();
         this.horaCadastro = this.dataHoraCadastro.toLocalTime();
     }
