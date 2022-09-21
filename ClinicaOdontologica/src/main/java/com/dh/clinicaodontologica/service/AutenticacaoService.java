@@ -1,4 +1,4 @@
-package com.dh.clinicaodontologica;
+package com.dh.clinicaodontologica.service;
 
 import com.dh.clinicaodontologica.entity.Usuario;
 import com.dh.clinicaodontologica.repository.UsuarioRepository;

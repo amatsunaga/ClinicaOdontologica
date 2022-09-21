@@ -49,17 +49,17 @@ public class CreateUserRun implements ApplicationRunner {
 
         //Populando usuario Dentista
         usuario1.setPassword(encoder.encode("123456"));
-        usuario1.setUsername("dentista1");
+        usuario1.setUsername("Gabriel");
         usuario1.setPerfis(perfilList1);
 
         //Populando usuario Paciente
         usuario2.setPassword(encoder.encode("1234567"));
-        usuario2.setUsername("paciente1");
+        usuario2.setUsername("Roberto");
         usuario2.setPerfis(perfilList2);
 
         //Populando usuario Consulta
         usuario3.setPassword(encoder.encode("1234567"));
-        usuario3.setUsername("consulta1");
+        usuario3.setUsername("Maria Teste");
         usuario3.setPerfis(perfilList3);
 
         repository.save(usuario1);
