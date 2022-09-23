@@ -6,8 +6,8 @@ import com.dh.clinicaodontologica.repository.ConsultaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConsultaService {
@@ -37,9 +37,13 @@ public class ConsultaService {
         repository.deleteById(id);
     }
 
-    public void alterar(Consulta consulta) {
+    public Consulta alterar(Consulta consulta) {
         repository.save(consulta);
+        return consulta;
     }
 
 
+    public Optional<Consulta> buscarPorId(long id) {
+        return repository.findById(id);
+    }
 }
