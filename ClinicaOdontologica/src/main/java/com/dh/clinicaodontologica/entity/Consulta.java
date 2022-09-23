@@ -1,6 +1,6 @@
 package com.dh.clinicaodontologica.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 
 public class Consulta {
 
-    @jakarta.persistence.Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "consulta_id")
     private Long consultaId;

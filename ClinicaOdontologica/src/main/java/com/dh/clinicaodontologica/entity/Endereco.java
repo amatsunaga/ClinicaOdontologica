@@ -1,6 +1,6 @@
 package com.dh.clinicaodontologica.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 public class Endereco {
 
-    @jakarta.persistence.Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String rua;

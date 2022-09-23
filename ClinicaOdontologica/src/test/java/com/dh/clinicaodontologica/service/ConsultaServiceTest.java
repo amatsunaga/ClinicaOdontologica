@@ -4,7 +4,7 @@ import com.dh.clinicaodontologica.entity.Consulta;
 import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.entity.Paciente;
 import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

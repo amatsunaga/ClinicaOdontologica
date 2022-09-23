@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Setter
 @Getter
