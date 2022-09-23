@@ -1,25 +1,23 @@
 package com.dh.clinicaodontologica.service;
 
 import com.dh.clinicaodontologica.entity.Dentista;
-import javax.transaction.Transactional;
+import com.dh.clinicaodontologica.entity.dto.DentistaDto;
+import com.dh.clinicaodontologica.exception.EmptyListException;
+import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 class DentistaServiceTest {
-
     @Autowired
     DentistaService service;
 
@@ -35,55 +33,50 @@ class DentistaServiceTest {
     }
 
     @Test
-    void concluindoSalvamento() {
-        // Funcionando
-        Dentista dentistaSalvo = new Dentista();
-        dentistaSalvo = service.salvar(dentista);
-
+    void salvarTest() throws ResourceNotFoundException {
+        Dentista dentistaSalvo = service.salvar(this.dentista);
         Assertions.assertNotNull(dentistaSalvo.getId());
     }
 
     @Test
-    void buscarTodos() {
-        // Funcionando
-        Dentista dentista1 = new Dentista();
-        Dentista dentista2 = new Dentista();
-        dentistaList = new ArrayList<>();
-        dentistaList.add(dentista1);
-        dentistaList.add(dentista2);
-        dentistaList = service.buscarTodos();
-
-        Assertions.assertEquals(2, dentistaList.size());
+    void buscarTodosTest() throws ResourceNotFoundException, EmptyListException {
+        Dentista dentistaSalvo = service.salvar(this.dentista);
+        List<DentistaDto> dentistaDtoList = service.buscarTodos();
+        Assertions.assertTrue(dentistaDtoList.size() > 0);
     }
 
     @Test
-    void buscarPorId() {
-        // Checar!!! Talvez ok, mas o id sempre muda pq estamos criando novos id a cada teste
-        Dentista dentistaBuscado = new Dentista();
-        dentistaBuscado = service.salvar(dentista);
-        Optional<Dentista> dentistaOptional = service.buscarPorId(1L);
+    void buscarPorIdTest() throws ResourceNotFoundException {
+        Dentista dentistaSalvo = service.salvar(this.dentista);
+        String nome = "Pedro";
+        dentistaSalvo.setNome(nome);
 
-        Assertions.assertEquals(3L, dentistaBuscado.getId());
+        DentistaDto dentistaDto = service.buscarPorId(dentistaSalvo.getId());
+
+        Assertions.assertEquals("Pedro", dentistaDto.getNome());
     }
 
     @Test
-    void excluir() {
-        //Deu certo, porém continua substituindo a id a cada teste
-        Dentista dentista3 = new Dentista();
-        dentista3 = service.salvar(dentista);
-        Assertions.assertEquals(11L, dentista.getId());
-
-
+    void buscarPorMatriculaTest() throws ResourceNotFoundException {
+        Dentista dentistaSalvo = service.salvar(this.dentista);
+        DentistaDto dentistaDto = service.buscarPorMatricula("12345");
+        Assertions.assertEquals("12345", dentistaDto.getMatricula());
     }
 
     @Test
-    void alterar() {
-        // Aparentemente ok
+    void excluirTest() throws ResourceNotFoundException {
+        Dentista dentistaAExcluir = service.salvar(this.dentista);
+        Long id = dentistaAExcluir.getId();
+        service.excluir(id);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.buscarPorId(id));
+    }
+
+    @Test
+    void alterarTest() throws ResourceNotFoundException {
+        Dentista dentistaAAlterar = service.salvar(this.dentista);
         String sobrenome = "Silva";
-        Dentista dentista = service.buscarPorId(1L).get();
-        dentista.setSobrenome(sobrenome);
-        Dentista dentistaAlterado = service.alterar(dentista);
-
+        dentistaAAlterar.setSobrenome(sobrenome);
+        Dentista dentistaAlterado = service.alterar(dentistaAAlterar);
         Assertions.assertEquals(sobrenome, dentistaAlterado.getSobrenome());
     }
 }

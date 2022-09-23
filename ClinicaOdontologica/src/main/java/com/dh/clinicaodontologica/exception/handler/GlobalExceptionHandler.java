@@ -1,5 +1,6 @@
 package com.dh.clinicaodontologica.exception.handler;
 
+import com.dh.clinicaodontologica.exception.EmptyListException;
 import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> processarErrorResourceNotFound(ResourceNotFoundException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+
+    @ExceptionHandler({EmptyListException.class})
+    public ResponseEntity<String> processarErrorEmptyList(EmptyListException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
 
 
 }

@@ -1,12 +1,15 @@
 package com.dh.clinicaodontologica.service;
 
 import com.dh.clinicaodontologica.entity.Dentista;
+import com.dh.clinicaodontologica.entity.dto.DentistaDto;
+import com.dh.clinicaodontologica.exception.EmptyListException;
+import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import com.dh.clinicaodontologica.repository.DentistaRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,33 +18,78 @@ public class DentistaService {
     @Autowired
     private DentistaRepository repository;
 
-    public Dentista salvar(Dentista dentista){
-        if(dentista.getNome() == null){
-            System.out.println("Insira o nome do médico");
+    public Dentista salvar(Dentista dentista) throws ResourceNotFoundException {
+        try {
+            return repository.save(dentista);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Erro ao cadastrar dentista: dados inseridos incorretamente ou matrícula já existente.");
         }
-        if(dentista.getSobrenome() == null){
-            System.out.println("Insira o sobrenome do médico");
-        }
-        if(dentista.getMatricula().isEmpty()){
-            System.out.println("Insira a matrícula do médico");
-        }
-        return repository.save(dentista);
     }
 
-    public List<Dentista> buscarTodos() {
-        return repository.findAll();
+    public List<DentistaDto> buscarTodos() throws EmptyListException {
+        List<Dentista> dentistaList = repository.findAll();
+
+        if (dentistaList.isEmpty()) throw new EmptyListException("Erro: não há dentistas cadastrados.");
+
+        List<DentistaDto> dentistaDtoList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+
+        for (Dentista d : dentistaList) {
+            dentistaDtoList.add(mapper.convertValue(d, DentistaDto.class));
+        }
+
+        return dentistaDtoList;
     }
 
-    public Optional<Dentista> buscarPorId(Long id) {
-        return repository.findById(id);
+    public DentistaDto buscarPorId(Long id) throws ResourceNotFoundException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        DentistaDto dentistaDto = null;
+
+        try {
+            Dentista dentistaOptional = repository.findById(id).get();
+            dentistaDto = mapper.convertValue(dentistaOptional, DentistaDto.class);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Erro ao buscar dentista: ID informado não existe.");
+        }
+        return dentistaDto;
     }
 
-    public void excluir(Long id) {
+    public DentistaDto buscarPorMatricula(String matricula) throws ResourceNotFoundException {
+
+        ObjectMapper mapper = new ObjectMapper();
+        DentistaDto dentistaDto = null;
+
+        try {
+            Dentista dentistaOptional = repository.findByMatricula(matricula).get();
+            dentistaDto = mapper.convertValue(dentistaOptional, DentistaDto.class);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Erro ao buscar dentista: matrícula informada não existe.");
+        }
+        return dentistaDto;
+    }
+
+    public void excluir(Long id) throws ResourceNotFoundException {
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao excluir dentista: ID informado não existe."));
         repository.deleteById(id);
     }
 
-    public Dentista alterar(Dentista dentista) {
-        return repository.save(dentista);
+    public Dentista alterar(Dentista dentista) throws ResourceNotFoundException {
+        try {
+            Dentista dentistaAAlterar = repository.findById(dentista.getId()).get();
+            if (dentista.getNome() != null) {
+                dentistaAAlterar.setNome(dentista.getNome());
+            }
+            if (dentista.getSobrenome() != null) {
+                dentistaAAlterar.setSobrenome(dentista.getSobrenome());
+            }
+            if (dentista.getMatricula() != null) {
+                dentistaAAlterar.setMatricula(dentista.getMatricula());
+            }
+            return repository.save(dentistaAAlterar);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Erro ao alterar dentista: ID informado não existe.");
+        }
     }
 
 }
