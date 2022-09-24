@@ -1,5 +1,6 @@
 package com.dh.clinicaodontologica.service;
 
+import com.dh.clinicaodontologica.entity.Consulta;
 import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.entity.Endereco;
 import javax.transaction.Transactional;
@@ -79,14 +80,14 @@ class EnderecoServiceTest {
 
     }
 
-//    @Test
-//    void alterar() {
-//        // Aparentemente ok
-//        String rua = "Avenida Brasil";
-//        Endereco endereco = service.buscarPorId(1L).get();
-//        endereco.setRua(rua);
-//        Endereco enderecoAlterado = service.alterar(endereco);
-//
-//        Assertions.assertEquals(endereco, enderecoAlterado.getRua());
-//    }
+    @Test
+    void alterar() {
+        //
+        String rua = "Rua do Zé";
+        Endereco endereco = service.buscarPorId(1L).get();
+        endereco.setRua(rua);
+        Endereco enderecoAlterado = service.alterar(endereco);
+
+        Assertions.assertEquals(rua, enderecoAlterado.getCidade());
+    }
 }

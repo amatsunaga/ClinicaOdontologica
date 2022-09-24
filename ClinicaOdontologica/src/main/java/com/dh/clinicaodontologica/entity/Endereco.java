@@ -15,6 +15,7 @@ public class Endereco {
 
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String rua;
     private int numero;

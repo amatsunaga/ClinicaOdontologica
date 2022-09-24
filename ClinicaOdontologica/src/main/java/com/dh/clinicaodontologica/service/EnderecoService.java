@@ -26,5 +26,8 @@ public class EnderecoService {
     public void excluir(Long id) {
         repository.deleteById(id);
     }
-    public void alterar(Endereco endereco) {repository.save(endereco);}
+    public Endereco alterar(Endereco endereco){
+        repository.save(endereco);
+        return endereco;
+    }
 }
