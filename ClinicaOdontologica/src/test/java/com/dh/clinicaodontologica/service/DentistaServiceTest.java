@@ -50,9 +50,7 @@ class DentistaServiceTest {
         Dentista dentistaSalvo = service.salvar(this.dentista);
         String nome = "Pedro";
         dentistaSalvo.setNome(nome);
-
         DentistaDto dentistaDto = service.buscarPorId(dentistaSalvo.getId());
-
         Assertions.assertEquals("Pedro", dentistaDto.getNome());
     }
 

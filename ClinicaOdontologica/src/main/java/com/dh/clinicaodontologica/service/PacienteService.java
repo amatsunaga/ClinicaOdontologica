@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PacienteService {
@@ -37,7 +36,7 @@ public class PacienteService {
         return listPacienteDTO;
     }
 
-    public Optional<Paciente> buscarPorId(Long id) {
+    public PacienteDto buscarPorId(Long id) {
         return repository.findById(id);
     }
 
@@ -46,7 +45,8 @@ public class PacienteService {
         repository.deleteById(id);
     }
 
-    public void alterar(Paciente paciente) {
+    public Paciente alterar(Paciente paciente) {
         repository.save(paciente);
+        return paciente;
     }
 }
