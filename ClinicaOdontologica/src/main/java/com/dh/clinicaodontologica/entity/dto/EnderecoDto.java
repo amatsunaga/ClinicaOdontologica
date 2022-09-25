@@ -15,13 +15,10 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EnderecoDto {
 
-    @NotNull
     private String rua;
 
-    @NotNull
     private String numero;
 
-    @NotNull
     private String cidade;
 
     private String bairro;

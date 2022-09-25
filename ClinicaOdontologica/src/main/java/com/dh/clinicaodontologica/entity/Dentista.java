@@ -22,11 +22,9 @@ public class Dentista {
     private Long id;
 
     @NotNull
-//    @Column(nullable = false)
     private String nome;
 
     @NotNull
-//    @Column(nullable = false)
     private String sobrenome;
 
     @NotNull

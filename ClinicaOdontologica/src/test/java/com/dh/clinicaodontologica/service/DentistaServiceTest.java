@@ -13,8 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 class DentistaServiceTest {
@@ -22,7 +20,6 @@ class DentistaServiceTest {
     DentistaService service;
 
     static Dentista dentista;
-    static List<Dentista> dentistaList;
 
     @BeforeEach
     void doBefore() {
@@ -53,7 +50,7 @@ class DentistaServiceTest {
 
         DentistaDto dentistaDto = service.buscarPorId(dentistaSalvo.getId());
 
-        Assertions.assertEquals("Pedro", dentistaDto.getNome());
+        Assertions.assertEquals(nome, dentistaDto.getNome());
     }
 
     @Test

@@ -1,11 +1,6 @@
 package com.dh.clinicaodontologica.service;
 
-import com.dh.clinicaodontologica.entity.Consulta;
-import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.entity.Endereco;
-import javax.transaction.Transactional;
-
-import com.dh.clinicaodontologica.entity.dto.DentistaDto;
 import com.dh.clinicaodontologica.entity.dto.EnderecoDto;
 import com.dh.clinicaodontologica.exception.EmptyListException;
 import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
@@ -14,14 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -31,7 +21,6 @@ class EnderecoServiceTest {
     EnderecoService service;
 
     static Endereco endereco;
-    static List<Endereco> enderecoList;
 
     @BeforeEach
     void doBefore() {
@@ -44,30 +33,30 @@ class EnderecoServiceTest {
     }
 
     @Test
-    void concluindoSalvamento() throws ResourceNotFoundException {
+    void salvarTest() throws ResourceNotFoundException {
         Endereco enderecoSalvo = service.salvar(endereco);
         Assertions.assertNotNull(enderecoSalvo.getId());
     }
 
     @Test
-    void buscarTodos() throws ResourceNotFoundException, EmptyListException {
+    void buscarTodosTest() throws ResourceNotFoundException, EmptyListException {
         Endereco enderecoSalvo = service.salvar(endereco);
         List<EnderecoDto> enderecoDtoList = service.buscarTodos();
         Assertions.assertTrue(enderecoDtoList.size() > 0);
     }
 
     @Test
-    void buscarPorId() throws ResourceNotFoundException {
+    void buscarPorIdTest() throws ResourceNotFoundException {
         Endereco enderecoBuscado = service.salvar(endereco);
         String cidade = "Cidade Teste Busca Por Id";
         enderecoBuscado.setCidade(cidade);
 
         EnderecoDto enderecoDto = service.buscarPorId(enderecoBuscado.getId());
-        Assertions.assertEquals(cidade, enderecoBuscado.getId());
+        Assertions.assertEquals(cidade, enderecoBuscado.getCidade());
     }
 
     @Test
-    void excluir() throws ResourceNotFoundException {
+    void excluirTest() throws ResourceNotFoundException {
         Endereco enderecoAExcluir = service.salvar(endereco);
         Long id = enderecoAExcluir.getId();
         service.excluir(id);
@@ -75,7 +64,7 @@ class EnderecoServiceTest {
     }
 
     @Test
-    void alterar() throws ResourceNotFoundException {
+    void alterarTest() throws ResourceNotFoundException {
         Endereco enderecoAAlterar = service.salvar(endereco);
         String rua = "Rua do Zé";
         enderecoAAlterar.setRua(rua);

@@ -18,7 +18,7 @@ public class EnderecoController {
     private EnderecoService service;
 
     @PostMapping
-    public ResponseEntity salvarEndereco(@RequestBody @Valid Endereco endereco) throws ResourceNotFoundException {
+    public ResponseEntity salvarEndereco(@RequestBody Endereco endereco) throws ResourceNotFoundException {
         return new ResponseEntity(service.salvar(endereco), HttpStatus.OK);
     }
 
