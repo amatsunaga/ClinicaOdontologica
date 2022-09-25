@@ -45,6 +45,7 @@ class PacienteServiceTest {
     void buscarTodosTest() throws ResourceNotFoundException, EmptyListException {
         Paciente pacienteSalvo = service.salvar(this.paciente);
         List<PacienteDto> pacienteDtoList = service.buscarTodos();
+
         Assertions.assertTrue(pacienteDtoList.size() > 0);
     }
     @Test
@@ -53,6 +54,7 @@ class PacienteServiceTest {
         String nome = "Michael";
         pacienteSalvo.setNome(nome);
         PacienteDto pacienteDto = service.buscarPorId(pacienteSalvo.getId());
+
         Assertions.assertEquals("Michael", pacienteDto.getNome());
     }
     @Test
@@ -60,6 +62,7 @@ class PacienteServiceTest {
         Paciente pacienteAExcluir = service.salvar(this.paciente);
         Long id = pacienteAExcluir.getId();
         service.excluir(id);
+
         Assertions.assertThrows(ResourceNotFoundException.class, () -> service.buscarPorId(id));
     }
     @Test
@@ -68,6 +71,7 @@ class PacienteServiceTest {
         String sobrenome = "Andrade";
         pacienteAAlterar.setSobrenome(sobrenome);
         Paciente pacienteAlterado = service.alterar(pacienteAAlterar);
+
         Assertions.assertEquals(sobrenome, pacienteAlterado.getSobrenome());
     }
 }
