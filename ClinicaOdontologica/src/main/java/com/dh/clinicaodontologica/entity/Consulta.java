@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -19,20 +20,23 @@ import java.time.LocalDateTime;
 
 public class Consulta {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "consulta_id")
     private Long consultaId;
 
 
     @ManyToOne
-    @JoinColumn(name = "dentista_id")
+    @JoinColumn(name = "dentista_id") //, nullable = false)
     private Dentista dentista;
 
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "paciente_id") //, nullable = false)
     private Paciente paciente;
 
-    private LocalDateTime dataHoraConsulta;
+    //@Column(nullable = false)
+    private LocalDate dataConsulta;
+
+    private LocalTime horarioConsulta;
 
 }

@@ -14,12 +14,12 @@ import javax.validation.constraints.NotNull;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DentistaDto {
 
-    @NotNull
+//    @NotNull
     private String nome;
 
-    @NotNull
+//    @NotNull
     private String sobrenome;
 
-    @NotNull
+//    @NotNull
     private String matricula;
 }

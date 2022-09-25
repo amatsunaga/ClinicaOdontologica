@@ -4,11 +4,14 @@ package com.dh.clinicaodontologica.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.UniqueElements;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,13 +24,13 @@ public class Dentista {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+//    @NotNull
     private String nome;
 
-    @NotNull
+//    @NotNull
     private String sobrenome;
 
-    @NotNull
+//    @NotNull
     @Column(unique = true)
     private String matricula;
 

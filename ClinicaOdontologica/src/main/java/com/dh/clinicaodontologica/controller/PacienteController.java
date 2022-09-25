@@ -36,6 +36,7 @@ public class PacienteController {
     public ResponseEntity getPacienteById(@PathVariable Long idPaciente) throws ResourceNotFoundException {
         return new ResponseEntity(service.buscarPorId(idPaciente), HttpStatus.OK);
     }
+
     @DeleteMapping
     public ResponseEntity excluir(@RequestParam("idPaciente") Long idPaciente) throws ResourceNotFoundException  {
         service.excluir(idPaciente);

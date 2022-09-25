@@ -3,21 +3,20 @@ package com.dh.clinicaodontologica.service;
 import com.dh.clinicaodontologica.entity.Consulta;
 import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.entity.Paciente;
+import com.dh.clinicaodontologica.entity.dto.ConsultaDto;
+import com.dh.clinicaodontologica.exception.EmptyListException;
 import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
-import static com.dh.clinicaodontologica.service.DentistaServiceTest.dentista;
 @SpringBootTest
 @Transactional
 class ConsultaServiceTest {
@@ -26,68 +25,63 @@ class ConsultaServiceTest {
     @Autowired
     ConsultaService service;
 
+    @Autowired
+    static Dentista dentista;
+
+    @Autowired
+    static Paciente paciente;
+
     static Consulta consulta;
-
-    static List<Consulta> consultaList;
-
+    
     @BeforeEach
     void doBefore() {
         this.consulta = new Consulta();
-        this.consulta.setDentista(new Dentista());
-        this.consulta.setPaciente(new Paciente());
-        this.consulta.setDataHoraConsulta(LocalDateTime.now());
+        this.consulta.setDentista(this.dentista);
+        this.consulta.setPaciente(this.paciente);
+        this.consulta.setDataConsulta(LocalDate.now());
+        this.consulta.setHorarioConsulta(LocalTime.now());
     }
 
     @Test
-    void concluindoSalvamento() {
-        Consulta consultaSalvar = new Consulta();
-        consultaSalvar = service.salvar(consulta);
-
-        Assertions.assertNotNull(consultaSalvar.getConsultaId());
+    void salvarTest() throws ResourceNotFoundException {
+        Consulta consultaSalva = service.salvar(consulta);
+        Assertions.assertNotNull(consultaSalva.getConsultaId());
     }
 
     @Test
-    void buscarTodos() {
-        Consulta consulta1 = new Consulta();
-        Consulta consulta2 = new Consulta();
-        consultaList = new ArrayList<>();
-        consultaList.add(consulta1);
-        consultaList.add(consulta2);
-        consultaList = service.buscarTodos();
-
-        Assertions.assertEquals(2, consultaList.size());
+    void buscarTodosTest() throws ResourceNotFoundException, EmptyListException {
+        Consulta consultaSalva = service.salvar(this.consulta);
+        List<ConsultaDto> consultaDtoList = service.buscarTodos();
+        Assertions.assertTrue(consultaDtoList.size() > 0);
     }
 
     @Test
-    void buscarPorId() {
-        Consulta consultaBuscada = new Consulta();
-        consultaBuscada = service.salvar(consulta);
-        Optional<Consulta> consultaOptional = service.buscarPorId(3L);
+    void buscarPorIdTest() throws ResourceNotFoundException {
+        Consulta consultaBuscada = service.salvar(consulta);
+        LocalTime horaTeste = LocalTime.of(03, 59);
+        consultaBuscada.setHorarioConsulta(horaTeste);
 
-        Assertions.assertEquals(3L, consultaBuscada.getConsultaId());
+        ConsultaDto consultaDto = service.buscarPorId(consultaBuscada.getConsultaId());
+
+        Assertions.assertEquals(horaTeste, consultaBuscada.getHorarioConsulta());
     }
 
     @Test
-    void excluir() {
-        Consulta consulta3 = new Consulta();
-        consulta3 = service.salvar(consulta);
-        Assertions.assertEquals(11L, consulta.getConsultaId());
-
-
+    void excluirTest() throws ResourceNotFoundException {
+        Consulta consulta3 = service.salvar(consulta);
+        Long id = consulta3.getConsultaId();
+        service.excluir(id);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.buscarPorId(id));
     }
 
     @Test
-    void alterar() {
-        String sobrenome = "Andrade";
-        Consulta consulta = service.buscarPorId(3L).get();
-        consulta.setPaciente(new Paciente());
-        consulta.setDentista(new Dentista());
-        Consulta consultaAlterado = service.alterar(consulta);
-
-        Assertions.assertEquals(sobrenome, consultaAlterado.getPaciente());
+    void alterarTest() throws ResourceNotFoundException {
+        Consulta consultaAAlterar = service.salvar(this.consulta);
+        LocalDate dataTeste = LocalDate.of(2020, 03, 19);
+        consultaAAlterar.setDataConsulta(dataTeste);
+        Consulta consultaAlterada = service.alterar(consultaAAlterar);
+        Assertions.assertEquals(dataTeste, consultaAlterada.getDataConsulta());
     }
-
-
 
 
 }

@@ -1,11 +1,14 @@
 package com.dh.clinicaodontologica.service;
 
+import com.dh.clinicaodontologica.entity.Consulta;
 import com.dh.clinicaodontologica.entity.Dentista;
+import com.dh.clinicaodontologica.entity.dto.ConsultaDto;
 import com.dh.clinicaodontologica.entity.dto.DentistaDto;
 import com.dh.clinicaodontologica.exception.EmptyListException;
 import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import com.dh.clinicaodontologica.repository.DentistaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +35,7 @@ public class DentistaService {
         if (dentistaList.isEmpty()) throw new EmptyListException("Erro: não há dentistas cadastrados.");
 
         List<DentistaDto> dentistaDtoList = new ArrayList<>();
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
         for (Dentista d : dentistaList) {
             dentistaDtoList.add(mapper.convertValue(d, DentistaDto.class));

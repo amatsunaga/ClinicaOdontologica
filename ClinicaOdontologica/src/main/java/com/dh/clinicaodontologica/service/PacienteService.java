@@ -1,7 +1,9 @@
 package com.dh.clinicaodontologica.service;
 
+import com.dh.clinicaodontologica.entity.Consulta;
 import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.entity.Paciente;
+import com.dh.clinicaodontologica.entity.dto.ConsultaDto;
 import com.dh.clinicaodontologica.entity.dto.DentistaDto;
 import com.dh.clinicaodontologica.entity.dto.PacienteDto;
 import com.dh.clinicaodontologica.exception.EmptyListException;
