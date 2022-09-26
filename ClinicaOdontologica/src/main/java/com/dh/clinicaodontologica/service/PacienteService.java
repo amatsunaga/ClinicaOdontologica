@@ -29,6 +29,8 @@ public class PacienteService {
 
 
     public Paciente salvar(Paciente paciente) throws ResourceNotFoundException {
+        logger.info("Salvando paciente...");
+
         try {
             return repository.save(paciente);
         } catch (Exception ex) {
@@ -37,6 +39,8 @@ public class PacienteService {
     }
 
     public List<PacienteDto> buscarTodos() throws EmptyListException {
+        logger.info("Buscando todos pacientes...");
+
         List<Paciente> listPaciente = repository.findAll();
 
         if (listPaciente.isEmpty()) throw new EmptyListException("Erro: não há pacientes cadastrados.");
@@ -52,6 +56,8 @@ public class PacienteService {
     }
 
     public PacienteDto buscarPorId(Long id) throws ResourceNotFoundException {
+        logger.info("Buscando paciente de ID " + id + "...");
+
         ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
         PacienteDto pacienteDto = null;
 
@@ -65,11 +71,15 @@ public class PacienteService {
     }
 
     public void excluir(Long id) throws ResourceNotFoundException {
+        logger.info("Excluindo paciente de ID " + id + "...");
+
         repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao excluir paciente: ID informado não existe."));
         repository.deleteById(id);
     }
 
     public Paciente alterar(Paciente paciente) throws ResourceNotFoundException {
+        logger.info("Alterando paciente...");
+
 
         try {
             Paciente pacienteAAlterar = repository.findById(paciente.getId()).get();

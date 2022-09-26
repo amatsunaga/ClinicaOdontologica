@@ -10,6 +10,7 @@ import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import com.dh.clinicaodontologica.repository.ConsultaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,10 @@ public class ConsultaService {
     @Autowired
     private ConsultaRepository repository;
 
+    private Logger logger = Logger.getLogger(ConsultaService.class);
+
     public Consulta salvar(Consulta consulta) throws ResourceNotFoundException {
+        logger.info("Salvando consulta...");
         try {
             return repository.save(consulta);
         } catch (Exception ex) {
@@ -34,6 +38,7 @@ public class ConsultaService {
     }
 
     public List<ConsultaDto> buscarTodos() throws EmptyListException {
+        logger.info("Buscando todas consultas...");
         List<Consulta> consultaList = repository.findAll();
 
         if (consultaList.isEmpty()) throw new EmptyListException("Erro: não há consultas cadastradas.");
@@ -49,6 +54,7 @@ public class ConsultaService {
     }
 
     public ConsultaDto buscarPorId(Long id) throws ResourceNotFoundException {
+        logger.info("Buscando consulta de ID " + id + "...");
 
         ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
         ConsultaDto consultaDto = null;
@@ -63,6 +69,8 @@ public class ConsultaService {
     }
 
     public List<ConsultaDto> buscarPorDentista(String nome) throws EmptyListException {
+        logger.info("Buscando consultas do(a) Dr(a) " + nome + "...");
+
         List<Consulta> consultaList = repository.findByDentistaNome(nome);
 
         if (consultaList.isEmpty()) throw new EmptyListException("Erro: não há consultas cadastradas para este(a) dentista.");
@@ -78,6 +86,8 @@ public class ConsultaService {
     }
 
     public List<ConsultaDto> buscarPorPaciente(String nome) throws EmptyListException {
+        logger.info("Buscando consultas do(a) paciente " + nome + "...");
+
         List<Consulta> consultaList = repository.findByPacienteNome(nome);
 
         if (consultaList.isEmpty()) throw new EmptyListException("Erro: não há consultas cadastradas para este(a) paciente.");
@@ -111,11 +121,15 @@ public class ConsultaService {
 //    }
 
     public void excluir(Long id) throws ResourceNotFoundException {
+        logger.info("Excluindo consulta de ID " + id + "...");
+
         repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao excluir consulta: ID informado não existe."));
         repository.deleteById(id);
     }
 
     public Consulta alterar(Consulta consulta) throws ResourceNotFoundException {
+        logger.info("Alterando consulta...");
+
         try {
             Consulta consultaAAlterar = repository.findById(consulta.getConsultaId()).get();
             if (consulta.getDentista() != null) {

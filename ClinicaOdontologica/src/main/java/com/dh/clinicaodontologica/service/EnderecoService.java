@@ -6,6 +6,7 @@ import com.dh.clinicaodontologica.exception.EmptyListException;
 import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import com.dh.clinicaodontologica.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,11 @@ public class EnderecoService {
     @Autowired
     private EnderecoRepository repository;
 
+    private Logger logger = Logger.getLogger(EnderecoService.class);
+
+
     public Endereco salvar(Endereco endereco) throws ResourceNotFoundException {
+        logger.info("Salvando endereço...");
         try {
             return repository.save(endereco);
         } catch (Exception ex) {
@@ -26,8 +31,9 @@ public class EnderecoService {
     }
 
     public List<EnderecoDto> buscarTodos() throws EmptyListException {
+        logger.info("Buscando todos endereços...");
 
-            List<Endereco> enderecoList = repository.findAll();
+        List<Endereco> enderecoList = repository.findAll();
             if (enderecoList.isEmpty()) throw new EmptyListException("Erro: não há endereços cadastrados.");
 
             List<EnderecoDto> enderecoDtoList = new ArrayList<>();
@@ -40,6 +46,7 @@ public class EnderecoService {
         }
 
     public EnderecoDto buscarPorId(Long id) throws ResourceNotFoundException {
+        logger.info("Buscando endereço de ID " + id + "...");
 
         ObjectMapper mapper = new ObjectMapper();
         EnderecoDto enderecoDto = null;
@@ -53,10 +60,14 @@ public class EnderecoService {
         return enderecoDto;
     }
     public void excluir(Long id) throws ResourceNotFoundException {
+        logger.info("Excluindo endereço de ID " + id + "...");
+
         repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao excluir endereço: ID informado não existe."));
         repository.deleteById(id);
     }
     public Endereco alterar(Endereco endereco) throws ResourceNotFoundException {
+        logger.info("Alterando endereço...");
+
         try {
             Endereco enderecoAAlterar = repository.findById(endereco.getId()).get();
             if (endereco.getRua() != null) {
