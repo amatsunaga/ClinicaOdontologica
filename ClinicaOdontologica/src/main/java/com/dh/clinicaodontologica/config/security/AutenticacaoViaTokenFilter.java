@@ -22,11 +22,6 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
     TokenService tokenService;
     @Autowired
     UsuarioRepository usuarioRepository;
-//
-//    public AutenticacaoViaTokenFilter(TokenService tokenService, UsuarioRepository usuarioRepository) {
-//        this.tokenService = tokenService;
-//        this.usuarioRepository = usuarioRepository;
-//    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

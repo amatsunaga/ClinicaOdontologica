@@ -27,7 +27,7 @@ public class Paciente {
     @Column(nullable = false)
     private String sobrenome;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
