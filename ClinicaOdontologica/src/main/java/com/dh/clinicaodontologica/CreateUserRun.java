@@ -26,21 +26,17 @@ public class CreateUserRun implements ApplicationRunner {
         //Criando nosso perfis
         Perfil perfilDentista = new Perfil();
         Perfil perfilPaciente = new Perfil();
-        Perfil perfilConsulta = new Perfil();
-        perfilPaciente.setDescricao("USER");
-        perfilDentista.setDescricao("ADMIN");
-        perfilConsulta.setDescricao("ADMIN");
 
+        perfilDentista.setDescricao("ADMIN");
+        perfilPaciente.setDescricao("USER");
 
         //Criando nossas listas de perfis
         List<Perfil> perfilList1 = new ArrayList<>();
         List<Perfil> perfilList2 = new ArrayList<>();
-        List<Perfil> perfilList3 = new ArrayList<>();
 
         //Populando listas de perfis
         perfilList1.add(perfilDentista);
         perfilList2.add(perfilPaciente);
-        perfilList3.add(perfilConsulta);
 
         //Criando nosso usuarios
         Usuario usuario1 = new Usuario();
@@ -57,13 +53,7 @@ public class CreateUserRun implements ApplicationRunner {
         usuario2.setUsername("Roberto");
         usuario2.setPerfis(perfilList2);
 
-        //Populando usuario Consulta
-        usuario3.setPassword(encoder.encode("1234567"));
-        usuario3.setUsername("Maria Teste");
-        usuario3.setPerfis(perfilList3);
-
         repository.save(usuario1);
         repository.save(usuario2);
-        repository.save(usuario3);
     }
 }
