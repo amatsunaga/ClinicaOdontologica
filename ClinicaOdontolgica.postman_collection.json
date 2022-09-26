@@ -1,0 +1,895 @@
+{
+	"info": {
+		"_postman_id": "f4c2738d-75a4-42af-a345-59365bdc5bad",
+		"name": "Clínica Odontológica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20931577"
+	},
+	"item": [
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Gabriel\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dentista",
+			"item": [
+				{
+					"name": "Salvar Dentista",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IkdhYnJpZWwiLCJpYXQiOjE2NjQxNTcwNzIsImV4cCI6MTY2NDE2MDY3Mn0.weZIX9X64UWLIeVX_L3yLrgst9BuN-sBPCUnwdJt8lk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Zezinho\",\r\n    \"sobrenome\": \"Dentinho\",\r\n    \"matricula\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dentista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dentista"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IkdhYnJpZWwiLCJpYXQiOjE2NjQxNTM1NzUsImV4cCI6MTY2NDE1NzE3NX0.IVhDVEkHx6Zfjt50YHq0M8ULD-DEjucEI9WeNHxhSWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/dentista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dentista"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IlJvYmVydG8iLCJpYXQiOjE2NjQxNTU4OTYsImV4cCI6MTY2NDE1OTQ5Nn0.mscSDlvmM_CocDLg8sxAV2-AO6VeHHS7Vphguw-gP1w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/dentista/findDentista/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dentista",
+								"findDentista",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Matrícula",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IkdhYnJpZWwiLCJpYXQiOjE2NjQxNTM1NzUsImV4cCI6MTY2NDE1NzE3NX0.IVhDVEkHx6Zfjt50YHq0M8ULD-DEjucEI9WeNHxhSWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/dentista/findByMatricula/1236",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dentista",
+								"findByMatricula",
+								"1236"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Dentista",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IkdhYnJpZWwiLCJpYXQiOjE2NjQxNTM1NzUsImV4cCI6MTY2NDE1NzE3NX0.IVhDVEkHx6Zfjt50YHq0M8ULD-DEjucEI9WeNHxhSWU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dentista?idDentista=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dentista"
+							],
+							"query": [
+								{
+									"key": "idDentista",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Dentista",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IkdhYnJpZWwiLCJpYXQiOjE2NjQxNTcwNzIsImV4cCI6MTY2NDE2MDY3Mn0.weZIX9X64UWLIeVX_L3yLrgst9BuN-sBPCUnwdJt8lk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Luizinho\",\r\n    \"matricula\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/dentista",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dentista"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereço",
+			"item": [
+				{
+					"name": "Salvar Endereço",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTQyMDEyLCJleHAiOjE2NjQxNDU2MTJ9.OWXZLVT6XN82ElS_BWzthXanb6qs51_BxqdApqubPy0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\": \"Bonita\",\r\n    \"numero\": \"321\",\r\n    \"cidade\": \"Teste\",\r\n    \"bairro\": \"Legal\",\r\n    \"cep\": \"10000210\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/endereco",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/endereco",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/endereco/findEndereco/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"findEndereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Endereço",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/endereco?idEndereco=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco"
+							],
+							"query": [
+								{
+									"key": "idEndereco",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Endereço",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IlJvYmVydG8iLCJpYXQiOjE2NjQxNTQyMjgsImV4cCI6MTY2NDE1NzgyOH0.IquznR-CT8iIfIWLb2AJlIlno6xSrzTY1XjfW6VCP9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"rua\": \"Feia\",\r\n    \"bairro\": \"Chato\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/endereco",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Paciente",
+			"item": [
+				{
+					"name": "Salvar Paciente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6IlJvYmVydG8iLCJpYXQiOjE2NjQxNTU4OTYsImV4cCI6MTY2NDE1OTQ5Nn0.mscSDlvmM_CocDLg8sxAV2-AO6VeHHS7Vphguw-gP1w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"TesteFinal2\",\r\n    \"sobrenome\": \"Campos\",\r\n    \"endereco\": {\r\n        \"id\": 2\r\n    },\r\n    \"rg\": \"123456\",\r\n    \"dataCadastro\": \"2022-02-02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/paciente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/paciente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/paciente/findPaciente/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente",
+								"findPaciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Paciente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/paciente?idPaciente=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente"
+							],
+							"query": [
+								{
+									"key": "idPaciente",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Paciente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"endereco\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/paciente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"paciente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consulta",
+			"item": [
+				{
+					"name": "Salvar Consulta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTQyMDEyLCJleHAiOjE2NjQxNDU2MTJ9.OWXZLVT6XN82ElS_BWzthXanb6qs51_BxqdApqubPy0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dentista\":{\r\n        \"id\": 1\r\n    },\r\n    \"paciente\":{\r\n        \"id\": 1\r\n    },\r\n    \"dataConsulta\": \"2022-10-21\",\r\n    \"horarioConsulta\": \"10:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/consulta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Todas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTQyMDEyLCJleHAiOjE2NjQxNDU2MTJ9.OWXZLVT6XN82ElS_BWzthXanb6qs51_BxqdApqubPy0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/consulta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MDY1ODIxLCJleHAiOjE2NjQwNjk0MjF9.jNJ4JPZqzt2ya5Y2Lqs_qQVyzjf_wjwPfXayuriA78E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/consulta/findConsulta/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta",
+								"findConsulta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Dentista",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTQyMDEyLCJleHAiOjE2NjQxNDU2MTJ9.OWXZLVT6XN82ElS_BWzthXanb6qs51_BxqdApqubPy0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/consulta/findByDentista?nome=Zezinho",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta",
+								"findByDentista"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Zezinho"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Paciente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTQyMDEyLCJleHAiOjE2NjQxNDU2MTJ9.OWXZLVT6XN82ElS_BWzthXanb6qs51_BxqdApqubPy0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/consulta/findByPaciente?nome=TesteFinal2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta",
+								"findByPaciente"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "TesteFinal2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Data*(Método comentado)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTQyMDEyLCJleHAiOjE2NjQxNDU2MTJ9.OWXZLVT6XN82ElS_BWzthXanb6qs51_BxqdApqubPy0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/consulta/findByData?data=2022-10-21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta",
+								"findByData"
+							],
+							"query": [
+								{
+									"key": "data",
+									"value": "2022-10-21"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Consulta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTI5NDgxLCJleHAiOjE2NjQxMzMwODF9.ovgFMUivAZM_vbMJvmGu9Djwd0bnKVHif-GBaezBa2E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/consulta?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Consulta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBcGkgQ2xpbmljYSBPZG9udG8gNiIsInN1YiI6Ik1hcmlhIFRlc3RlIiwiaWF0IjoxNjY0MTI5NDgxLCJleHAiOjE2NjQxMzMwODF9.ovgFMUivAZM_vbMJvmGu9Djwd0bnKVHif-GBaezBa2E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"consultaId\": 3,\r\n    \"dataConsulta\": \"2022-11-10\",\r\n    \"horarioConsulta\": \"08:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/consulta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"consulta"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

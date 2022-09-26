@@ -44,11 +44,6 @@ public class ConsultaController {
         return new ResponseEntity(service.buscarPorPaciente(nome), HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "/findByData", method = RequestMethod.GET)
-//    public ResponseEntity getConsultasByData(@RequestParam("data") String data) throws EmptyListException {
-//        return new ResponseEntity(service.buscarPorData(data), HttpStatus.OK);
-//    }
-
     @DeleteMapping
     public ResponseEntity excluir(@RequestParam("id") Long id) throws ResourceNotFoundException {
         service.excluir(id);

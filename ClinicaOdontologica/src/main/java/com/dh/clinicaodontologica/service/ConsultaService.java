@@ -102,24 +102,6 @@ public class ConsultaService {
         return consultaDtoList;
     }
 
-//    public List<ConsultaDto> buscarPorData(String data) throws EmptyListException {
-//        DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder().appendPattern("YYYY-MM-DD").toFormatter();
-//        //DateTimeFormatter dateTimeFormat = new DateTimeFormatter();
-//        LocalDate dataConsulta = dateTimeFormatter.parse(data, LocalDate::from);
-//        List<Consulta> consultaList = repository.findByData(String.valueOf(dataConsulta));
-//
-//        if (consultaList.isEmpty()) throw new EmptyListException("Erro: não há consultas cadastradas nesta data.");
-//
-//        List<ConsultaDto> consultaDtoList = new ArrayList<>();
-//        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-//
-//        for (Consulta c : consultaList) {
-//            consultaDtoList.add(mapper.convertValue(c, ConsultaDto.class));
-//        }
-//
-//        return consultaDtoList;
-//    }
-
     public void excluir(Long id) throws ResourceNotFoundException {
         logger.info("Excluindo consulta de ID " + id + "...");
 
