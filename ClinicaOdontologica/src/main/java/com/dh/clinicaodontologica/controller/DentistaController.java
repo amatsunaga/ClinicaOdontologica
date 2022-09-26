@@ -5,6 +5,7 @@ import com.dh.clinicaodontologica.entity.dto.DentistaDto;
 import com.dh.clinicaodontologica.exception.EmptyListException;
 import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import com.dh.clinicaodontologica.service.DentistaService;
+import net.bytebuddy.pool.TypePool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -20,7 +20,7 @@ public class AutenticacaoService implements UserDetailsService {
             Usuario usuario= repository.findByUsername(username);
             return usuario;
         }catch (UsernameNotFoundException exception){
-            throw new UsernameNotFoundException("Usuario não existe");
+            throw new UsernameNotFoundException("Usuário não existe");
         }
     }
 }

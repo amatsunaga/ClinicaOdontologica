@@ -22,22 +22,23 @@ class PacienteServiceTest {
 
     @Autowired
     PacienteService service;
+    @Autowired
+    static Endereco endereco;
     static Paciente paciente;
-    static List<Paciente> pacienteList;
 
     @BeforeEach
     void doBefore() {
         this.paciente = new Paciente();
-        this.paciente.setRg("234.234.234-03");
         this.paciente.setNome("Michael");
         this.paciente.setSobrenome("Scott");
-        this.paciente.setEndereco(new Endereco());
-        this.paciente.setDataCadastro(LocalDate.from(LocalDateTime.now()));
+        this.paciente.setEndereco(this.endereco);
+        this.paciente.setRg("234.234.234-03");
+        this.paciente.setDataCadastro(LocalDate.now());
     }
-    @Test
 
-    void salvarTest() throws ResourceNotFoundException {
-        Paciente pacienteSalvo = service.salvar(paciente);
+    @Test
+    public void salvarTest() throws ResourceNotFoundException {
+        Paciente pacienteSalvo = service.salvar(this.paciente);
         Assertions.assertNotNull(pacienteSalvo.getId());
     }
 
@@ -45,9 +46,9 @@ class PacienteServiceTest {
     void buscarTodosTest() throws ResourceNotFoundException, EmptyListException {
         Paciente pacienteSalvo = service.salvar(this.paciente);
         List<PacienteDto> pacienteDtoList = service.buscarTodos();
-
         Assertions.assertTrue(pacienteDtoList.size() > 0);
     }
+
     @Test
     void buscarPorIdTest() throws ResourceNotFoundException {
         Paciente pacienteSalvo = service.salvar(this.paciente);
@@ -55,18 +56,19 @@ class PacienteServiceTest {
         pacienteSalvo.setNome(nome);
         PacienteDto pacienteDto = service.buscarPorId(pacienteSalvo.getId());
 
-        Assertions.assertEquals("Michael", pacienteDto.getNome());
+        Assertions.assertEquals(nome, pacienteDto.getNome());
     }
+
     @Test
     void excluirTest() throws ResourceNotFoundException {
         Paciente pacienteAExcluir = service.salvar(this.paciente);
         Long id = pacienteAExcluir.getId();
         service.excluir(id);
-
         Assertions.assertThrows(ResourceNotFoundException.class, () -> service.buscarPorId(id));
     }
+
     @Test
-    void alterarTest() {
+    void alterarTest() throws ResourceNotFoundException {
         Paciente pacienteAAlterar = service.salvar(this.paciente);
         String sobrenome = "Andrade";
         pacienteAAlterar.setSobrenome(sobrenome);

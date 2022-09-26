@@ -1,6 +1,8 @@
 package com.dh.clinicaodontologica.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +15,20 @@ import lombok.Setter;
 @Entity
 public class Endereco {
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
+    @Column(nullable = false)
     private String rua;
-    private int numero;
+
+    @Column(nullable = false)
+    private String numero;
+
+    @Column(nullable = false)
     private String cidade;
+
     private String bairro;
+
     private String cep;
 }

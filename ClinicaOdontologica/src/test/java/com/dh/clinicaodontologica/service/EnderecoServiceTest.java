@@ -1,22 +1,17 @@
 package com.dh.clinicaodontologica.service;
 
-import com.dh.clinicaodontologica.entity.Consulta;
-import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.entity.Endereco;
-import javax.transaction.Transactional;
+import com.dh.clinicaodontologica.entity.dto.EnderecoDto;
+import com.dh.clinicaodontologica.exception.EmptyListException;
+import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -26,68 +21,55 @@ class EnderecoServiceTest {
     EnderecoService service;
 
     static Endereco endereco;
-    static List<Endereco> enderecoList;
 
     @BeforeEach
     void doBefore() {
         this.endereco = new Endereco();
         this.endereco.setRua("Rua das Dores");
-        this.endereco.setNumero(666);
+        this.endereco.setNumero("666");
         this.endereco.setCidade("Manaus");
         this.endereco.setBairro("Ubirajara");
         this.endereco.setCep("69015690");
     }
 
     @Test
-    void concluindoSalvamento() {
-        // Funcionando
-        Endereco enderecoSalvo = new Endereco();
-        enderecoSalvo = service.salvar(endereco);
-
+    void salvarTest() throws ResourceNotFoundException {
+        Endereco enderecoSalvo = service.salvar(endereco);
         Assertions.assertNotNull(enderecoSalvo.getId());
     }
 
     @Test
-    void buscarTodos() {
-        // Funcionando
-        Endereco endereco1 = new Endereco();
-        Endereco endereco2 = new Endereco();
-        enderecoList = new ArrayList<>();
-        enderecoList.add(endereco1);
-        enderecoList.add(endereco2);
-        enderecoList = service.buscarTodos();
-
-        Assertions.assertEquals(2, enderecoList.size());
+    void buscarTodosTest() throws ResourceNotFoundException, EmptyListException {
+        Endereco enderecoSalvo = service.salvar(endereco);
+        List<EnderecoDto> enderecoDtoList = service.buscarTodos();
+        Assertions.assertTrue(enderecoDtoList.size() > 0);
     }
 
     @Test
-    void buscarPorId() {
-        // Checar!!! Talvez ok, mas o id sempre muda pq estamos criando novos id a cada teste
-        Endereco enderecoBuscado = new Endereco();
-        enderecoBuscado = service.salvar(endereco);
-        Optional<Endereco> EnderecoOptional = service.buscarPorId(1L);
+    void buscarPorIdTest() throws ResourceNotFoundException {
+        Endereco enderecoBuscado = service.salvar(endereco);
+        String cidade = "Cidade Teste Busca Por Id";
+        enderecoBuscado.setCidade(cidade);
 
-        Assertions.assertEquals(1L, enderecoBuscado.getId());
+        EnderecoDto enderecoDto = service.buscarPorId(enderecoBuscado.getId());
+        Assertions.assertEquals(cidade, enderecoBuscado.getCidade());
     }
 
     @Test
-    void excluir() {
-        //Deu certo, porém continua substituindo a id a cada teste
-        Endereco endereco3 = new Endereco();
-        endereco3 = service.salvar(endereco);
-        Assertions.assertEquals(2L, endereco.getId());
-
-
+    void excluirTest() throws ResourceNotFoundException {
+        Endereco enderecoAExcluir = service.salvar(endereco);
+        Long id = enderecoAExcluir.getId();
+        service.excluir(id);
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> service.buscarPorId(id));
     }
 
     @Test
-    void alterar() {
-        //
+    void alterarTest() throws ResourceNotFoundException {
+        Endereco enderecoAAlterar = service.salvar(endereco);
         String rua = "Rua do Zé";
-        Endereco endereco = service.buscarPorId(1L).get();
-        endereco.setRua(rua);
-        Endereco enderecoAlterado = service.alterar(endereco);
+        enderecoAAlterar.setRua(rua);
+        Endereco enderecoAlterado = service.alterar(enderecoAAlterar);
 
-        Assertions.assertEquals(rua, enderecoAlterado.getCidade());
+        Assertions.assertEquals(rua, enderecoAlterado.getRua());
     }
 }

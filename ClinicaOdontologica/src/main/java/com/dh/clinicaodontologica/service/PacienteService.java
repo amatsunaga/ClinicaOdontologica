@@ -1,9 +1,16 @@
 package com.dh.clinicaodontologica.service;
 
+import com.dh.clinicaodontologica.entity.Consulta;
+import com.dh.clinicaodontologica.entity.Dentista;
 import com.dh.clinicaodontologica.entity.Paciente;
+import com.dh.clinicaodontologica.entity.dto.ConsultaDto;
+import com.dh.clinicaodontologica.entity.dto.DentistaDto;
 import com.dh.clinicaodontologica.entity.dto.PacienteDto;
+import com.dh.clinicaodontologica.exception.EmptyListException;
+import com.dh.clinicaodontologica.exception.ResourceNotFoundException;
 import com.dh.clinicaodontologica.repository.PacienteRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +27,25 @@ public class PacienteService {
     private Logger logger = Logger.getLogger(PacienteService.class);
 
 
-    public Paciente salvar(Paciente paciente)  {
-        return repository.save(paciente);
+    public Paciente salvar(Paciente paciente) throws ResourceNotFoundException {
+        logger.info("Salvando paciente...");
+
+        try {
+            return repository.save(paciente);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Erro ao cadastrar paciente: nome, sobrenome e RG são obrigatórios. Verifique também se o ID do endereço está correto.");
+        }
     }
 
-    public List<PacienteDto> buscarTodos(){
+    public List<PacienteDto> buscarTodos() throws EmptyListException {
+        logger.info("Buscando todos pacientes...");
+
         List<Paciente> listPaciente = repository.findAll();
+
+        if (listPaciente.isEmpty()) throw new EmptyListException("Erro: não há pacientes cadastrados.");
+
         List<PacienteDto> listPacienteDTO = new ArrayList<>();
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
         for (Paciente p : listPaciente){
             listPacienteDTO.add(mapper.convertValue(p, PacienteDto.class));
@@ -36,17 +54,52 @@ public class PacienteService {
         return listPacienteDTO;
     }
 
-    public PacienteDto buscarPorId(Long id) {
-        return repository.findById(id);
+    public PacienteDto buscarPorId(Long id) throws ResourceNotFoundException {
+        logger.info("Buscando paciente de ID " + id + "...");
+
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        PacienteDto pacienteDto = null;
+
+        try {
+            Paciente pacienteOptional = repository.findById(id).get();
+            pacienteDto = mapper.convertValue(pacienteOptional, PacienteDto.class);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Erro ao buscar paciente: ID informado não existe.");
+        }
+        return pacienteDto;
     }
 
+    public void excluir(Long id) throws ResourceNotFoundException {
+        logger.info("Excluindo paciente de ID " + id + "...");
 
-    public void excluir(Long id) {
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Erro ao excluir paciente: ID informado não existe."));
         repository.deleteById(id);
     }
 
-    public Paciente alterar(Paciente paciente) {
-        repository.save(paciente);
-        return paciente;
+    public Paciente alterar(Paciente paciente) throws ResourceNotFoundException {
+        logger.info("Alterando paciente...");
+
+
+        try {
+            Paciente pacienteAAlterar = repository.findById(paciente.getId()).get();
+            if (paciente.getNome() != null) {
+                pacienteAAlterar.setNome(paciente.getNome());
+            }
+            if (paciente.getSobrenome() != null) {
+                pacienteAAlterar.setSobrenome(paciente.getSobrenome());
+            }
+            if (paciente.getEndereco() != null) {
+                pacienteAAlterar.setEndereco(paciente.getEndereco());
+            }
+            if (paciente.getRg() != null) {
+                pacienteAAlterar.setRg(paciente.getRg());
+            }
+            if (paciente.getDataCadastro() != null) {
+                pacienteAAlterar.setDataCadastro(paciente.getDataCadastro());
+            }
+            return repository.save(pacienteAAlterar);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Erro ao alterar paciente: ID informado não existe ou dados inseridos incorretamente.");
+        }
     }
 }

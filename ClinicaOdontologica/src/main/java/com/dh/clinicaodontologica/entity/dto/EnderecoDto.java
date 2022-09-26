@@ -7,19 +7,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DentistaDto {
+public class EnderecoDto {
 
-//    @NotNull
-    private String nome;
+    private String rua;
 
-//    @NotNull
-    private String sobrenome;
+    private String numero;
 
-//    @NotNull
-    private String matricula;
+    private String cidade;
+
+    private String bairro;
+
+    private String cep;
 }
