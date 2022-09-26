@@ -27,16 +27,13 @@ public class Consulta {
 
 
     @ManyToOne
-    @JoinColumn(name = "dentista_id") //, nullable = false)
+    @JoinColumn(name = "dentista_id", nullable = false)
     private Dentista dentista;
 
     @ManyToOne
-    @JoinColumn(name = "paciente_id") //, nullable = false)
+    @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
-    //@Column(nullable = false)
-    private LocalDate dataConsulta;
-
-    private LocalTime horarioConsulta;
-
+    @Column(unique = true, nullable = false)
+    private LocalDateTime dataHoraConsulta;
 }

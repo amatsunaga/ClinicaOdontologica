@@ -21,7 +21,7 @@ public class EnderecoService {
         try {
             return repository.save(endereco);
         } catch (Exception ex) {
-            throw new ResourceNotFoundException("Erro ao cadastrar endereço.");
+            throw new ResourceNotFoundException("Erro ao cadastrar endereço: rua, número e cidade são obrigatórios.");
         }
     }
 

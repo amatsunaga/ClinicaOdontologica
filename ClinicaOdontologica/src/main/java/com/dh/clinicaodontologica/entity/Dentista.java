@@ -24,14 +24,13 @@ public class Dentista {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull
+    @Column(nullable = false)
     private String nome;
 
-//    @NotNull
+    @Column(nullable = false)
     private String sobrenome;
 
-//    @NotNull
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String matricula;
 
 }

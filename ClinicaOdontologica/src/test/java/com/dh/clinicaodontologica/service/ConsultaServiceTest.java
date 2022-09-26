@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -42,18 +43,27 @@ class ConsultaServiceTest {
     @BeforeEach
     void doBefore() {
         this.dentista = new Dentista();
+        this.dentista.setNome("José");
+        this.dentista.setSobrenome("Ferreira");
+        this.dentista.setMatricula("12345");
 
         this.paciente = new Paciente();
+        this.paciente.setNome("Paciente");
+        this.paciente.setSobrenome("Teste");
+//        this.paciente.setEndereco(this.endereco);
+        this.paciente.setRg("1234567");
+//        this.paciente.setDataCadastro(LocalDate.now());
 
         this.consulta = new Consulta();
         this.consulta.setDentista(this.dentista);
         this.consulta.setPaciente(this.paciente);
-        this.consulta.setDataConsulta(LocalDate.now());
-        this.consulta.setHorarioConsulta(LocalTime.now());
+        this.consulta.setDataHoraConsulta(LocalDateTime.now());
     }
 
     @Test
     void salvarTest() throws ResourceNotFoundException {
+        dentistaService.salvar(this.dentista);
+        pacienteService.salvar(this.paciente);
         Consulta consultaSalva = consultaService.salvar(consulta);
         Assertions.assertNotNull(consultaSalva.getConsultaId());
     }
@@ -70,13 +80,15 @@ class ConsultaServiceTest {
 
     @Test
     void buscarPorIdTest() throws ResourceNotFoundException {
+        dentistaService.salvar(this.dentista);
+        pacienteService.salvar(this.paciente);
         Consulta consultaBuscada = consultaService.salvar(consulta);
-        LocalTime horaTeste = LocalTime.of(03, 59);
-        consultaBuscada.setHorarioConsulta(horaTeste);
+        LocalDateTime dataHoraConsulta = LocalDateTime.of(2100, 01, 01, 03, 59);
+        consultaBuscada.setDataHoraConsulta(dataHoraConsulta);
 
         ConsultaDto consultaDto = consultaService.buscarPorId(consultaBuscada.getConsultaId());
 
-        Assertions.assertEquals(horaTeste, consultaBuscada.getHorarioConsulta());
+        Assertions.assertEquals(dataHoraConsulta, consultaBuscada.getDataHoraConsulta());
     }
 
     @ParameterizedTest
@@ -111,6 +123,8 @@ class ConsultaServiceTest {
 
     @Test
     void excluirTest() throws ResourceNotFoundException {
+        dentistaService.salvar(this.dentista);
+        pacienteService.salvar(this.paciente);
         Consulta consulta3 = consultaService.salvar(consulta);
         Long id = consulta3.getConsultaId();
         consultaService.excluir(id);
@@ -119,11 +133,13 @@ class ConsultaServiceTest {
 
     @Test
     void alterarTest() throws ResourceNotFoundException {
+        dentistaService.salvar(this.dentista);
+        pacienteService.salvar(this.paciente);
         Consulta consultaAAlterar = consultaService.salvar(this.consulta);
-        LocalDate dataTeste = LocalDate.of(2020, 03, 19);
-        consultaAAlterar.setDataConsulta(dataTeste);
+        LocalDateTime dataHoraTeste = LocalDateTime.of(2020, 03, 19, 11, 11);
+        consultaAAlterar.setDataHoraConsulta(dataHoraTeste);
         Consulta consultaAlterada = consultaService.alterar(consultaAAlterar);
-        Assertions.assertEquals(dataTeste, consultaAlterada.getDataConsulta());
+        Assertions.assertEquals(dataHoraTeste, consultaAlterada.getDataHoraConsulta());
     }
 
 

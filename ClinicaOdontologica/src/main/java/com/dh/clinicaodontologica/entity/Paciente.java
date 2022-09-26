@@ -21,17 +21,17 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull
+    @Column(nullable = false)
     private String nome;
 
-//    @NotNull
+    @Column(nullable = false)
     private String sobrenome;
 
     @OneToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-//    @NotNull
+    @Column(nullable = false)
     private String rg;
 
     private LocalDate dataCadastro;

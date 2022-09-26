@@ -29,7 +29,7 @@ public class ConsultaService {
         try {
             return repository.save(consulta);
         } catch (Exception ex) {
-            throw new ResourceNotFoundException("Erro ao cadastrar consulta: dados inseridos incorretamente ou consulta já existente.");
+            throw new ResourceNotFoundException("Erro ao cadastrar consulta: dados inseridos incorretamente ou horário já ocupado.");
         }
     }
 
@@ -124,11 +124,8 @@ public class ConsultaService {
             if (consulta.getPaciente() != null) {
                 consultaAAlterar.setPaciente(consulta.getPaciente());
             }
-            if (consulta.getDataConsulta() != null) {
-                consultaAAlterar.setDataConsulta(consulta.getDataConsulta());
-            }
-            if (consulta.getHorarioConsulta() != null) {
-                consultaAAlterar.setHorarioConsulta(consulta.getHorarioConsulta());
+            if (consulta.getDataHoraConsulta() != null) {
+                consultaAAlterar.setDataHoraConsulta(consulta.getDataHoraConsulta());
             }
             return repository.save(consultaAAlterar);
         } catch (Exception ex) {

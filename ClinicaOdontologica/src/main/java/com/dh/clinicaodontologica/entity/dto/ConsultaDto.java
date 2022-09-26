@@ -29,19 +29,8 @@ public class ConsultaDto {
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
-    private LocalDate dataConsulta;
+    @Column(unique = true, nullable = false)
+    private LocalDateTime dataHoraConsulta;
 
-    private LocalTime horarioConsulta;
-
-
-
-//    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-mm-ddT00:00:000")
-//    private LocalDateTime dataHoraCadastro;
-//
-//
-//    public void setdataHoraCadastro (LocalDateTime dataHoraCadastro){
-//        this.dataHoraCadastro = Instant.ofEpochMilli(dataHoraCadastro.getHour()).atZone(ZoneId.of("UTC")).toLocalDateTime();
-//        this.dataCadastro = this.dataHoraCadastro.toLocalDate();
-//        this.horaCadastro = this.dataHoraCadastro.toLocalTime();
-//    }
+//    private LocalDate dataConsulta = dataHoraConsulta.toLocalDate();
 }
