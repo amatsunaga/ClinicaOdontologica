@@ -17,6 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Entity(name = "usuario")
 public class Usuario implements UserDetails {
 
@@ -26,17 +27,17 @@ public class Usuario implements UserDetails {
 
     @NotEmpty
     @Size(min = 6)
-    //@NotBlank(unique = true)
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
     @NotEmpty
     @Size(min = 6)
+    @Column(nullable = false)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Column(nullable = false)
     private List<Perfil> perfis;
-
 
 
     @Override

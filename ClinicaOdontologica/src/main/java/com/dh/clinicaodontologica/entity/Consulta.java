@@ -17,14 +17,11 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 public class Consulta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "consulta_id")
     private Long consultaId;
-
 
     @ManyToOne
     @JoinColumn(name = "dentista_id", nullable = false)

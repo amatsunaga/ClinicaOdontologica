@@ -6,20 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DentistaDto {
+public class DentistaRequestDTO {
 
-//    @NotNull
+    @NotBlank
     private String nome;
 
-//    @NotNull
+    @NotBlank
     private String sobrenome;
 
-//    @NotNull
+    @NotBlank
     private String matricula;
+
+    @NotBlank
+    private UsuarioDTO usuario;
 }
